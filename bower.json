@@ -1,0 +1,20 @@
+{
+  "name": "bizlunch",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "1.3.8",
+    "es5-shim": "~3.1.0",
+	"components-font-awesome": "~4.1.0",
+    "angular-resource": "1.3.8",
+    "angular-sanitize": "1.3.8",
+    "angular-route": "1.3.8",
+	"bootstrap-sass-official" : "master",
+      "ng-file-upload" : "master",
+      "moment" : "master",
+      "angular-loading-bar" : "master"
+  },
+  "devDependencies": {
+
+  },
+  "appPath": "app"
+}
