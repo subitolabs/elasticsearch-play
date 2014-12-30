@@ -5,7 +5,7 @@ module.exports = {
             "<%= yeoman.common %>/js/{,*/}*.js"
         ],
         tasks: [
-            "concat:js_bizlunch",
+            "concat:js_me",
             "concat:js_vendor"
         ]
     },
@@ -16,7 +16,7 @@ module.exports = {
         tasks: [
             "compass:server",
             "autoprefixer",
-            "concat:css_bizlunch",
+            "concat:css_me",
             "concat:css_vendor"
         ]
     },
