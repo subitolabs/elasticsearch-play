@@ -11,7 +11,6 @@ module.exports = function (grunt)
     dist: './dist',
 	vendor: './bower_components',
 	tmp: './.tmp',
-    phonegap: './phonegap/www',
     release: grunt.template.today('yyyy_mm_dd_hh_MM_ss')
   };
 
@@ -39,18 +38,6 @@ module.exports = function (grunt)
     ]);
   });
 
-  grunt.registerTask('build:phonegap', [
-    'clean:dist',
-    'compass:dist',
-    'autoprefixer',
-    'concat',
-    'ngmin',
-      'cssmin:phonegap',
-    'copy:phonegap',
-      'string-replace:phonegap',
-      'exec:run_phonegap_android'
-  ]);
-
   grunt.registerTask('build', [
     'clean:dist',
       'compass:dist',
@@ -66,13 +53,11 @@ module.exports = function (grunt)
   
   grunt.registerTask('deploy', [
 	  'build',
-	  'exec:deploy',
-      'exec:slack'
+	  'exec:deploy'
   ]);
 
   grunt.registerTask('default', [
-    'test',
-    'build'
+    'serve'
   ]);
 };
 

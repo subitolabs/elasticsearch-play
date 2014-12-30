@@ -1,0 +1,27 @@
+@import "components-font-awesome/scss/variables";
+
+$fa-font-path: "/fonts";
+
+@import "components-font-awesome/scss/mixins";
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('#{$fa-font-path}/fontawesome-webfont.eot');
+  src: url('#{$fa-font-path}/fontawesome-webfont.eot?#iefix') format('embedded-opentype'),
+  url('#{$fa-font-path}/fontawesome-webfont.woff') format('woff'),
+  url('#{$fa-font-path}/fontawesome-webfont.ttf') format('truetype'),
+  url('#{$fa-font-path}/fontawesome-webfont.svg?#fontawesomeregular') format('svg');
+  //src: url('#{$fa-font-path}/FontAwesome.otf') format('opentype'); // used when developing fonts
+  font-weight: normal;
+  font-style: normal;
+}
+
+@import "components-font-awesome/scss/core";
+@import "components-font-awesome/scss/larger";
+@import "components-font-awesome/scss/fixed-width";
+@import "components-font-awesome/scss/list";
+@import "components-font-awesome/scss/bordered-pulled";
+@import "components-font-awesome/scss/spinning";
+@import "components-font-awesome/scss/rotated-flipped";
+@import "components-font-awesome/scss/stacked";
+@import "components-font-awesome/scss/icons";

@@ -1,0 +1,33 @@
+@import "../variables";
+
+html, body
+{
+  height: 100%;
+  min-height: 350px;
+}
+
+body {
+  background-color:$bz_menu_background;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 200;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3
+ {
+   font-weight: 400;
+ }
+
+h4, h5, h6, label
+{
+  font-weight: 300;
+}
+
+@media #{$information-phone-small}
+{
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}

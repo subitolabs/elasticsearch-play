@@ -1,0 +1,81 @@
+@import "../variables";
+
+body
+{
+  padding-top:65px;
+}
+
+em
+{
+  font-weight: bold;
+  font-style: normal;
+}
+a.url
+{
+  color:darkgreen;
+}
+
+.left-column
+{
+  width: 50%;
+  position: fixed;
+  top: 40px;
+  bottom: 0px;
+  left: 0px;
+  background: $bz_menu_background;
+  border-right: 1px solid #E8E8E8;
+
+  .__h
+  {
+    position: relative;
+    color: #fff;
+
+    h2
+    {
+      margin: 0;
+      font-size: 20px;
+      line-height: 30px;
+      padding-left: 50px;
+    }
+
+    a
+    {
+      position: absolute;
+      right:0;
+      top:0;
+      height:30px;
+      width:30px;
+      line-height: 30px;
+      color: #fff;
+    }
+  }
+
+}
+.left-column textarea
+{
+  height: 100% !important;
+}
+.left-column > div
+{
+  position: absolute;
+  top:0;
+  bottom: 0;
+  width: 50%;
+}
+.left-column > div.__left
+{
+  left:0;
+}
+.left-column > div.__right
+{
+  right:0;
+}
+
+#inputAnalysers, #inputFilters
+{
+  position: absolute;
+  top:30px;
+  left:0;
+  right:0;
+  bottom: 0;
+}
