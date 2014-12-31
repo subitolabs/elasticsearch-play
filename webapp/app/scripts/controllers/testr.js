@@ -21,13 +21,29 @@ myApp.controller('testr', ['$scope', '$http', function($scope, $http)
     {
         editor.getSession().setTabSize(2);
         editor.getSession().setUseWrapMode(true);
+        editor.getSession().setFoldStyle('markbeginend');
+        editor.$blockScrolling = 999999;
 
-        editor.setValue(JSON.stringify(JSON.parse(editor.getValue()), null, '\t'));
-    };
+        (function(_editor)
+        {
+           setTimeout(function()
+           {
+               try {
+                   _editor.setValue(JSON.stringify(JSON.parse(_editor.getValue()), null, '\t'));
+               } catch(e)
+               {
+                   console.log(e);
+               }
+           }, 100);
+        })(editor);
 
-    $scope.aceChanged = function(e) {
         //
     };
 
-    $scope.run();
+    $scope.aceChanged = function(e) {
+
+    };
+
+
+//    $scope.run();
 }]);

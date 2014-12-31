@@ -14,11 +14,10 @@ module.exports = {
             "<%= yeoman.vendor %>/angular-sanitize/angular-sanitize.js",
             "<%= yeoman.vendor %>/ace-builds/src-noconflict/ace.js",
             "<%= yeoman.vendor %>/ace-builds/src-noconflict/ext-textarea.js",
-            "<%= yeoman.vendor %>/ace-builds/src-noconflict/mode-json.js",
             "<%= yeoman.vendor %>/ace-builds/src-noconflict/theme-github.js",
             "<%= yeoman.vendor %>/angular-ui-ace/ui-ace.js",
             "<%= yeoman.vendor %>/moment/moment.js",
-            "<%= yeoman.app %>/scripts/vendor/*"
+            "<%= yeoman.app %>/scripts/ace/*"
         ],
         dest: "<%= yeoman.tmp %>/scripts/vendor.js"
     },
