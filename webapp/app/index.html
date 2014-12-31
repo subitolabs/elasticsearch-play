@@ -42,7 +42,7 @@
                           firstLineNumber: 10,
                           onLoad: aceLoaded,
                           onChange: aceChanged
-                        }" ng-model="filters"></div>
+                        }" ng-model="jsonFilters"></div>
               </div>
 
               <div class="__right">
@@ -60,7 +60,7 @@
                           onLoad: aceLoaded,
                           onChange: aceChanged
                         }"
-                       ng-model="analyzers"> </div>
+                       ng-model="jsonAnalyzers"> </div>
               </div>
           </div>
 
@@ -114,8 +114,11 @@
                   <div class="__inner_max_height">
                       <table class="table table-stripped">
                           <tr ng-repeat="filter in availableFilters">
-                              <td>{{filter.title}}</td>
-                              <td><a>select</a> | <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/{{filter.url}}" target="_blank">documentation</a></td>
+                              <td width="100%">
+                                  <a ng-click="addFilter(filter)" class="btn btn-primary" title="Add this filter"><i class="fa fa-plus"></i></a>
+                                  {{filter.title}}
+                              </td>
+                              <td nowrap><a class="btn btn-default" title="Documentation" href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/{{filter.url}}" target="_blank"><i class="fa fa-help"></i></a></td>
                           </tr>
                       </table>
                   </div>

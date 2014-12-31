@@ -25,7 +25,7 @@ class Request extends \Symfony\Component\HttpFoundation\Request
         $requestBody = $request->getContent();
 
         if (!empty($requestBody))
-        {
+        {//var_dump($requestBody);//die();
             $requestBodyData = json_decode($requestBody, true);
 
             if (!empty($requestBodyData) && is_array($requestBodyData))

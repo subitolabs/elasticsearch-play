@@ -113,14 +113,6 @@
         $inputAnalyzers = $request->get('analyzers');
         $inputFilters   = $request->get('filters');
 
-        if (empty($inputAnalyzers) || empty($inputFilters))
-        {
-            throw new \Exception('Parameters are missing!');
-        }
-
-        $inputAnalyzers = json_decode($inputAnalyzers, true);
-        $inputFilters   = json_decode($inputFilters, true);
-
         if ($inputAnalyzers === false || $inputFilters === false)
         {
             throw new \Exception('Parameters are not JSON!');
