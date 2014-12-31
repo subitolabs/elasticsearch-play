@@ -2,7 +2,7 @@
 
 body
 {
-  padding-top:65px;
+  padding-top:40px;
 }
 
 em
@@ -24,33 +24,8 @@ a.url
   left: 0px;
   background: $bz_menu_background;
   border-right: 1px solid #E8E8E8;
-
-  .__h
-  {
-    position: relative;
-    color: #fff;
-
-    h2
-    {
-      margin: 0;
-      font-size: 20px;
-      line-height: 30px;
-      padding-left: 50px;
-    }
-
-    a
-    {
-      position: absolute;
-      right:0;
-      top:0;
-      height:30px;
-      width:30px;
-      line-height: 30px;
-      color: #fff;
-    }
-  }
-
 }
+
 .left-column textarea
 {
   height: 100% !important;
@@ -71,6 +46,40 @@ a.url
   right:0;
 }
 
+.results
+{
+  width: 50%;
+
+  .__body
+  {
+    padding: 1%;
+
+    .___h
+    {
+      height: 40px;
+    }
+
+    &.running
+    {
+      table
+      {
+        display: none;
+
+      }
+    }
+  }
+
+  table
+  {
+    width: 100%;
+
+    span.label
+    {
+      margin-right: 5px;
+    }
+  }
+}
+
 #inputAnalysers, #inputFilters
 {
   position: absolute;
@@ -78,4 +87,30 @@ a.url
   left:0;
   right:0;
   bottom: 0;
+}
+
+.__h
+{
+  position: relative;
+  color: #fff;
+  background: $bz_menu_background;
+
+  h2
+  {
+    margin: 0;
+    font-size: 20px;
+    line-height: 30px;
+    padding-left: 50px;
+    float: left;
+  }
+
+  a
+  {
+    display: inline-block;
+    float: right;
+    height:30px;
+    width:30px;
+    line-height: 30px;
+    color: #fff;
+  }
 }

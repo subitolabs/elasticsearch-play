@@ -28,9 +28,10 @@
       <div class="clearfix" ng-controller="testr">
           <div class="left-column">
               <div class="__left">
-                  <div class="__h">
+                  <div class="__h clearfix">
                       <h2>Filters</h2>
-                      <a ng-click="dialog_url_open=true"><i class="fa fa-folder-open"></i></a>
+                      <a ng-click="dialog_filter_add_open=true"><i class="fa fa-folder-open"></i></a>
+                      <a ng-click="dialog_filter_add_open=true"><i class="fa fa-plus"></i></a>
                   </div>
                   <div  id="inputFilters"
                         ui-ace="{
@@ -45,7 +46,7 @@
               </div>
 
               <div class="__right">
-                  <div class="__h">
+                  <div class="__h clearfix">
                       <h2>Analyzers</h2>
                       <a ng-click="dialog_url_open=true"><i class="fa fa-folder-open"></i></a>
                   </div>
@@ -63,34 +64,65 @@
               </div>
           </div>
 
-          <div class="pull-right" style="width: 48%; margin-right: 1%">
-              <h2>Live test</h2>
-              <div>
-                  <input type="text" class="form-control" placeholder="Enter phrase to analyze.." />
+          <div class="results pull-right">
+              <div class="__h clearfix">
+                  <h2>Live test</h2>
               </div>
-              <div id="header"></div>
-              <br />
-              <div id="results">
-              </div>
-          </div>
-      </div>
-
-      <div ng-class="{dialog : true, 'dialog--open' : dialog_url_open}">
-          <div class="dialog__overlay"></div>
-          <div class="dialog__content">
-              <h3><strong>Load</strong> external ressource</h3>
-              <form class="form-horizontal">
-
-                  <div class="form-group">
-                      <label for="inputLoadURL" class="col-sm-2 control-label">URL:</label>
-                      <div class="col-sm-10">
-                          <input type="url" class="form-control" id="inputLoadURL" placeholder="http://...">
+              <div ng-class="{__body : true, loading : running}">
+                  <form ng-submit="run()">
+                      <input type="text" class="form-control" placeholder="Enter phrase to analyze.." ng-model="sample" />
+                      <div class="clearfix" style="margin-top:5px">
+                          <button class="btn btn-success" type="submit">Run Tests</button>
                       </div>
-                  </div>
-
-              </form>
-              <div><button class="action btn btn-default" ng-click="dialog_url_open=false">Close</button></div>
+                  </form>
+                  <div class="___h"></div>
+                  <table class="table table-striped">
+                      <tr ng-repeat="test in tests">
+                          <td>{{test.title}}</td>
+                          <td>
+                              <span ng-repeat="token in test.tokens" class="label label-primary">
+                                  {{token.token}}
+                              </span>
+                          </td>
+                      </tr>
+                  </table>
+              </div>
           </div>
+
+          <div ng-class="{dialog : true, 'dialog--open' : dialog_url_open}">
+              <div class="dialog__overlay"></div>
+              <div class="dialog__content">
+                  <h3><strong>Load</strong> external ressource</h3>
+                  <form class="form-horizontal">
+
+                      <div class="form-group">
+                          <label for="inputLoadURL" class="col-sm-2 control-label">URL:</label>
+                          <div class="col-sm-10">
+                              <input type="url" class="form-control" id="inputLoadURL" placeholder="http://...">
+                          </div>
+                      </div>
+
+                  </form>
+                  <div><button class="action btn btn-default" ng-click="dialog_url_open=false">Close</button></div>
+              </div>
+          </div>
+
+          <div ng-class="{dialog : true, 'dialog--open' : dialog_filter_add_open}">
+              <div class="dialog__overlay"></div>
+              <div class="dialog__content">
+                  <h3>Available <strong>token filters</strong></h3>
+                  <div class="__inner_max_height">
+                      <table class="table table-stripped">
+                          <tr ng-repeat="filter in availableFilters">
+                              <td>{{filter.title}}</td>
+                              <td><a>select</a> | <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/{{filter.url}}" target="_blank">documentation</a></td>
+                          </tr>
+                      </table>
+                  </div>
+                  <div><button class="action btn btn-default" ng-click="dialog_filter_add_open=false">Close</button></div>
+              </div>
+          </div>
+
       </div>
 
 	  <script src="/scripts/vendor.js"></script>
