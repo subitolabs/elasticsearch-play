@@ -3,7 +3,6 @@ myApp.directive('myJsonEditor', [function()
     return {
         restrict: 'E',
         require: 'ngModel',
-        templateUrl: '/views/json-editor.html',
         scope: {
 
         },
@@ -11,20 +10,30 @@ myApp.directive('myJsonEditor', [function()
         {
             var editor = null, editorSession = null, tmrChanged = 0;
 
-            scope.aceLoaded = function(_editor)
-            {
-                editor          = _editor;
-                editorSession   = _editor.getSession();
+            editor          = window.ace.edit(root[0]);
+            editorSession   = editor.getSession();
 
-                editorSession.setTabSize(2);
-                editorSession.setUseWrapMode(true);
-                editorSession.setFoldStyle('markbeginend');
-                editor.$blockScrolling = 999999;
+            editorSession.setMode('ace/mode/json');
+            editorSession.setTabSize(2);
+            editorSession.setUseWrapMode(true);
+            editorSession.setFoldStyle('markbeginend');
+            editor.$blockScrolling = 999999;
 
-                ngModel.$render();
-            };
+            editor.setOptions({
+                enableBasicAutocompletion: true,
+                enableLiveAutocompletion: true
+            });
 
-            scope.aceChanged = function(e)
+            ace.require("ace/ext/language_tools");
+
+            editor.completers = [{
+                getCompletions: function(editor, session, pos, prefix, callback)
+                {
+                    callback(null, scope.$parent.getCompletionTerms(attr.ngModel));
+                }
+            }];
+
+            editorSession.on('change', function(e)
             {
                 if (angular.isDefined(e)) {
 
@@ -41,7 +50,7 @@ myApp.directive('myJsonEditor', [function()
                         }
                     }, 300);
                 }
-            };
+            });
 
             ngModel.$render = function()
             {
@@ -65,6 +74,13 @@ myApp.directive('myJsonEditor', [function()
             scope.$parent.$watch(attr.ngModel, function(value)
             {
                 ngModel.$render();
+            }, true);
+
+            scope.$watch(function() {
+                return [root[0].offsetWidth, root[0].offsetHeight];
+            }, function() {
+                editor.resize();
+                editor.renderer.updateFull();
             }, true);
         }
     };

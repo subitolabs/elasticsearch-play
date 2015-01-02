@@ -9,19 +9,5 @@ module.exports = {
                 dest: "<%= yeoman.dist %>/styles"
             }
         ]
-    },
-    phonegap: {
-        options: {
-            keepBreaks: true
-        },
-        files: [
-            {
-                expand: true,
-                cwd: "<%= yeoman.tmp %>/styles",
-                src: "*.css",
-                dest: "<%= yeoman.phonegap %>/styles"
-
-            }
-        ]
     }
 };

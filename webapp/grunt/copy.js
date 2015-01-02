@@ -10,6 +10,7 @@ module.exports = {
                     "*.{ico,png,txt}",
                     "*.config",
                     "*.html",
+                    "*.js",
                     "views/{,*/}*.html",
                     "images/{,*/}*.{webp}",
                     "fonts/*",
@@ -22,29 +23,6 @@ module.exports = {
                 dest: "<%= yeoman.dist %>/images",
                 src: [
                     "generated/*"
-                ]
-            }
-        ]
-    },
-    phonegap: {
-        files: [
-            {
-                expand: true,
-                cwd: "<%= yeoman.tmp %>",
-                dest: "<%= yeoman.phonegap %>",
-                src: [
-                    "scripts/*.js"
-                ]
-            },
-            {
-                expand: true,
-                cwd: "<%= yeoman.app %>",
-                dest: "<%= yeoman.phonegap %>",
-                src: [
-                    "fonts/*",
-                    "sounds/*",
-                    "views/{,*/}*.html",
-                    "images/{,*/}*.*",
                 ]
             }
         ]

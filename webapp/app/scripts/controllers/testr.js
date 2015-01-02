@@ -3,25 +3,24 @@
  */
 myApp.controller('testr', ['$scope', '$http', function($scope, $http)
 {
-    var tmrAceChanged       = 0;
-
     $scope.filters          = {"my_word_delimiter" : {"type" : "word_delimiter", "catenate_words" : true, "preserve_original" : true, "generate_word_parts" : false}};
+    $scope.tokenizers       = {};
     $scope.analyzers        = {"standard" : {"type" : "standard"}, "french" : {"type" : "french"}};
 
-    $scope.jsonFilters      = '';
-    $scope.jsonAnalyzers    = '';
+    $scope.settings = {
+      'font_size' : 14
+    };
 
     $scope.analyzer_new     = {};
 
     $scope.sample       = 'François hollande passe à la télévision en slip.';
     $scope.running      = false;
     $scope.error        = null;
-    $scope.availableFilters = window.availableFilters;
+    $scope.availableFilters     = window.availableFilters;
+    $scope.availableTokenizers  = window.availableTokenizers;
 
     $scope.dialog_filter_add_open       = false;
     $scope.dialog_analyzer_new_open     = false;
-
-
 
     $scope.run = function()
     {
@@ -69,6 +68,20 @@ myApp.controller('testr', ['$scope', '$http', function($scope, $http)
         $scope.dialog_filter_add_open = false;
     };
 
+    $scope.addTokenizer = function(tokenizer)
+    {
+        var buffer = {"type" : tokenizer.uid};
+
+        angular.forEach(tokenizer.options, function(option)
+        {
+            buffer[option.title] = option.default;
+        });
+
+        $scope.tokenizers['my_' + tokenizer.uid] = buffer;
+
+        $scope.dialog_tokenizer_add = false;
+    };
+
     $scope.addAnalyzer = function()
     {
         $scope.dialog_analyzer_new_open = false;
@@ -82,15 +95,34 @@ myApp.controller('testr', ['$scope', '$http', function($scope, $http)
         }
     };
 
-
-
-    $scope.aceFiltersChanged = function(e)
+    $scope.saveSettings = function()
     {
-        clearTimeout(tmrAceChanged);
 
-        tmrAceChanged = setTimeout(function() {
-         //   $scope.aceChanged('filters');
-        }, 200);
+    };
+
+    $scope.getCompletionTerms = function(type)
+    {
+        var results = [];
+
+        if (type === 'filters')
+        {
+            angular.forEach(availableFilters, function(filter)
+            {
+               angular.forEach(filter.options, function(option)
+               {
+                  results.push({"value" : option.title, "meta" : "filter option", "caption" : option.title, "exactMatch":1,"score":300});
+               });
+            });
+        }
+        else if (type === 'tokenizers' || type === 'analyzers')
+        {
+            angular.forEach($scope.filters, function(value, name)
+            {
+                results.push({"value" : name, "meta" : "filter", "caption" : name, "exactMatch":1,"score":300});
+            });
+        }
+
+        return results;
     };
 
     $scope.run();

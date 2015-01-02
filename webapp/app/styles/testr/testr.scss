@@ -1,10 +1,5 @@
 @import "../variables";
 
-body
-{
-  padding-top:40px;
-}
-
 em
 {
   font-weight: bold;
@@ -48,7 +43,7 @@ a.url
 
 .results
 {
-  width: 50%;
+  background: #fff;
 
   .__body
   {
@@ -133,4 +128,9 @@ my-json-editor
     line-height: 30px;
     color: #fff;
   }
+}
+
+.ui-splitbar, body
+{
+  background: $bz_background_green_logo;
 }

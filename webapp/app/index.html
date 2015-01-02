@@ -19,61 +19,79 @@
   <body id="body" ng-app="testr">
 
       <header class="navbar navbar-default">
-            <div></div>
-              <div class="pull-right">
-                  <a ng-click="dialog_url_open=true"><i class="fa fa-gears"></i> Paramètres</a>
-              </div>
+            <h1 class="pull-left">ElasticSearch TestR <small>filters tokenizers analyzers</small></h1>
+            <div class="pull-right">
+                <a ng-click="dialog_settings=true"><i class="fa fa-gears"></i> Settings</a>
+                <a ng-click="dialog_about=true"><i class="fa fa-beer"></i> About</a>
+            </div>
       </header>
 
       <div class="clearfix" ng-controller="testr">
-          <div class="left-column">
-              <div class="__left">
-                  <div class="__h clearfix">
-                      <h2>Filters</h2>
-                      <a ng-click="dialog_filter_add_open=true"><i class="fa fa-folder-open"></i></a>
-                      <a ng-click="dialog_filter_add_open=true"><i class="fa fa-plus"></i></a>
-                  </div>
-                  <my-json-editor ng-model="filters"></my-json-editor>
-              </div>
 
-              <div class="__right">
-                  <div class="__h clearfix">
-                      <h2>Analyzers</h2>
-                      <a ng-click="dialog_url_open=true"><i class="fa fa-folder-open"></i></a>
-                      <a ng-click="dialog_analyzer_add_open=true"><i class="fa fa-plus"></i></a>
-                  </div>
-                  <my-json-editor ng-model="analyzers"></my-json-editor>
-              </div>
-          </div>
+          <ui-layout style="top: 40px; left:2px;right: 2px;bottom: 2px;" options="{ flow : 'row', dividerSize : 5 }">
 
-          <div class="results pull-right">
-              <div class="__h clearfix">
-                  <h2>Live test</h2>
-              </div>
-              <div ng-class="{__body : true, loading : running}">
-                  <form ng-submit="run()">
-                      <input type="text" class="form-control" placeholder="Enter phrase to analyze.." ng-model="sample" />
-                      <div class="clearfix" style="margin-top:5px">
-                          <button class="btn btn-success" type="submit">Run Tests</button>
+              <ui-layout-container>
+
+                  <ui-layout options="{ flow : 'column', dividerSize : 5 }">
+                      <ui-layout-container>
+                          <div class="__h clearfix">
+                              <h2>Filters</h2>
+                              <a ng-click="dialog_filter_add_open=true"><i class="fa fa-folder-open"></i></a>
+                              <a ng-click="dialog_filter_add_open=true"><i class="fa fa-plus"></i></a>
+                          </div>
+                          <my-json-editor ng-model="filters"></my-json-editor>
+                      </ui-layout-container>
+                      <ui-layout-container>
+                          <div class="__h clearfix">
+                              <h2>Tokenizers</h2>
+                              <a ng-click="dialog_tokenizer_add=true"><i class="fa fa-folder-open"></i></a>
+                              <a ng-click="dialog_tokenizer_add=true"><i class="fa fa-plus"></i></a>
+                          </div>
+                          <my-json-editor ng-model="tokenizers"></my-json-editor>
+                      </ui-layout-container>
+                      <ui-layout-container>
+                          <div class="__h clearfix">
+                              <h2>Analyzers</h2>
+                              <a ng-click="dialog_url_open=true"><i class="fa fa-folder-open"></i></a>
+                              <a ng-click="dialog_analyzer_add_open=true"><i class="fa fa-plus"></i></a>
+                          </div>
+                          <my-json-editor ng-model="analyzers"></my-json-editor>
+                      </ui-layout-container>
+                  </ui-layout>
+
+              </ui-layout-container>
+
+              <ui-layout-container class="results">
+                  <div class="__h clearfix">
+                      <h2>Live test</h2>
+                  </div>
+                  <div ng-class="{__body : true, loading : running}">
+                      <form ng-submit="run()">
+                          <input type="text" class="form-control" placeholder="Enter phrase to analyze.." ng-model="sample" />
+                          <div class="clearfix" style="margin-top:5px">
+                              <button class="btn btn-success" type="submit">Run Tests</button>
+                          </div>
+                      </form>
+                      <div class="___h"></div>
+                      <div class="alert alert-danger" ng-show="error!=null">
+                          <i class="fa fa-exclamation-triangle"></i>
+                          <p>{{error}}</p>
                       </div>
-                  </form>
-                  <div class="___h"></div>
-                  <div class="alert alert-danger" ng-show="error!=null">
-                      <i class="fa fa-exclamation-triangle"></i>
-                      <p>{{error}}</p>
-                  </div>
-                  <table class="table table-striped">
-                      <tr ng-repeat="test in tests">
-                          <td>{{test.title}}</td>
-                          <td>
+                      <table class="table table-striped">
+                          <tr ng-repeat="test in tests">
+                              <td>{{test.title}}</td>
+                              <td>
                               <span ng-repeat="token in test.tokens" class="label label-primary">
                                   {{token.token}}
                               </span>
-                          </td>
-                      </tr>
-                  </table>
-              </div>
-          </div>
+                              </td>
+                          </tr>
+                      </table>
+                  </div>
+              </ui-layout-container>
+
+          </ui-layout>
+
 
           <my-dialog title="Available token filters" open="dialog_filter_add_open">
               <table class="table table-stripped">
@@ -83,6 +101,18 @@
                           {{filter.title}}
                       </td>
                       <td nowrap><a class="btn btn-default" title="Documentation" href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/{{filter.url}}" target="_blank">?</a></td>
+                  </tr>
+              </table>
+          </my-dialog>
+
+          <my-dialog title="New tokenizer" open="dialog_tokenizer_add">
+              <table class="table table-stripped">
+                  <tr ng-repeat="token in availableTokenizers">
+                      <td width="100%">
+                          <a ng-click="addTokenizer(token)" class="btn btn-primary" title="Add this tokenizer"><i class="fa fa-plus"></i></a>
+                          {{token.title}}
+                      </td>
+                      <td nowrap><a class="btn btn-default" title="Documentation" href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/{{token.url}}" target="_blank">?</a></td>
                   </tr>
               </table>
           </my-dialog>
@@ -114,6 +144,42 @@
                       <input type="submit" class="btn btn-success" value="Ok" />
                   </div>
               </form>
+          </my-dialog>
+
+          <my-dialog title="About this application" open="dialog_settings">
+              <form class="form-horizontal" ng-submit="saveSettings()">
+                  <div class="form-group">
+                      <label for="inputSettingsFontSize" class="col-sm-4 control-label">Editor font size:</label>
+                      <div class="col-sm-8">
+                          <input type="number" class="form-control" id="inputSettingsFontSize" ng-model="settings.font_size">
+                      </div>
+                  </div>
+                  <div>
+                      <input type="submit" class="btn btn-success" value="Save settings" />
+                  </div>
+              </form>
+          </my-dialog>
+
+          <my-dialog title="About this application" open="dialog_about">
+              <p>Made with love during 2014 Chistmas party by Thomas Decaux (aka <a href="http://ebuildy.com" target="_blank">eBuildy</a>)</p>
+              <p>
+                Things I used:
+                <ul class="text-left">
+                    <li>Angular Javascript framework</li>
+                    <li>Angular UI layout</li>
+                    <li>ACE editor</li>
+                    <li>Continuous integration with Grunt tasks</li>
+                    <li>API with Php / Symfony2 framework / elasticsearch client</li>
+                    <li>Hosted in the cloud</li>
+                    <li>ElasticSearch version 1.4</li>
+                </ul>
+              </p>
+              <p class="text-left">
+                  If you find a bug or have cool ideas, share it!
+              </p>
+              <p>
+                  <a href="https://github.com/ebuildy/elasticsearch-testr" target="_blank" class="btn btn-success"><i class="fa fa-github"></i> github.com/ebuildy/elasticsearch-testr</a>
+              </p>
           </my-dialog>
 
       </div>

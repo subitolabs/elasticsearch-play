@@ -6,17 +6,6 @@
   left: 0;
 }
 
-.dialog {
-  position: fixed;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-align-items: center;
-  align-items: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  pointer-events: none;
-}
-
 .dialog__overlay {
   position: absolute;
   z-index: 1;
@@ -146,6 +135,16 @@
 
 .dialog
 {
+  z-index: 999999;
+  position: fixed;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  pointer-events: none;
+
   .__inner_max_height
   {
     max-height: 400px;

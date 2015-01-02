@@ -11,14 +11,13 @@ module.exports = {
     js_vendor: {
         src: [
             "<%= yeoman.vendor %>/angular/angular.js",
-            "<%= yeoman.vendor %>/angular-route/angular-route.js",
             "<%= yeoman.vendor %>/angular-resource/angular-resource.js",
             "<%= yeoman.vendor %>/angular-sanitize/angular-sanitize.js",
             "<%= yeoman.vendor %>/ace-builds/src-noconflict/ace.js",
+            "<%= yeoman.vendor %>/ace-builds/src-noconflict/ext-language_tools.js",
             "<%= yeoman.vendor %>/ace-builds/src-noconflict/ext-textarea.js",
-            "<%= yeoman.vendor %>/ace-builds/src-noconflict/theme-github.js",
-            "<%= yeoman.vendor %>/angular-ui-ace/ui-ace.js",
-            "<%= yeoman.vendor %>/moment/moment.js",
+            "<%= yeoman.vendor %>/raf/index.js",
+            "<%= yeoman.vendor %>/angular-ui-layout/src/ui-layout.js",
             "<%= yeoman.app %>/scripts/ace/*"
         ],
         dest: "<%= yeoman.tmp %>/scripts/vendor.js"
@@ -29,7 +28,8 @@ module.exports = {
     },
     css_vendor: {
         src: [
-            "<%= yeoman.tmp %>/styles/vendor/*.css"
+            "<%= yeoman.tmp %>/styles/vendor/*.css",
+            "<%= yeoman.vendor %>/angular-ui-layout/src/ui-layout.css",
         ],
         dest: "<%= yeoman.tmp %>/styles/vendor.css"
     }

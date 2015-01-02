@@ -3,15 +3,18 @@
   "version": "0.0.1",
   "dependencies": {
     "angular": "1.3.8",
-	"components-font-awesome": "~4.1.0",
+    "components-font-awesome": "~4.1.0",
     "angular-resource": "1.3.8",
     "angular-sanitize": "1.3.8",
     "angular-route": "1.3.8",
-	"bootstrap-sass-official" : "master",
-    "ace-builds" : "master"
+    "angular-ui-ace": "master",
+    "angular-ui-layout": "master",
+    "bootstrap-sass-official": "master",
+    "ace-builds": "master"
   },
-  "devDependencies": {
-
-  },
-  "appPath": "app"
+  "devDependencies": {},
+  "appPath": "app",
+  "resolutions": {
+    "ace-builds": "master"
+  }
 }

@@ -1,12 +1,27 @@
 @import "../variables";
 
-
 header
 {
   background:$bz_background_green_logo;
-  position: fixed;
-  left:0;
-  top:0;
-  right:0;
   height:40px;
+  padding: 0 10px;
+
+  h1
+  {
+    margin-top: 4px;
+    color: #fff;
+    font-size: 30px;
+
+    small
+    {
+      color: $bz_menu_background;
+    }
+  }
+
+  a
+  {
+    display: inline-block;
+    line-height: 40px;
+    color: #fff;
+  }
 }

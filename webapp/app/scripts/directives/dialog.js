@@ -11,6 +11,7 @@ myApp.directive('myDialog', [function()
         },
         link: function(scope)
         {
+
         }
     };
 }]);
