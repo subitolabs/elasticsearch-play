@@ -37,11 +37,24 @@
   max-width: 560px;
   min-width: 290px;
   background: #fff;
-  padding: 4em;
+  padding: 10px;
   text-align: center;
   position: relative;
   z-index: 5;
   opacity: 0;
+
+  h3
+  {
+    margin-top:0;
+  }
+
+  a.___c
+  {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 1.5em;
+  }
 }
 
 .dialog--open .dialog__content {
@@ -136,11 +149,17 @@
   .__inner_max_height
   {
     max-height: 400px;
-    overflow-y: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
 
     table
     {
       text-align: left;
+
+      .btn
+      {
+        padding: 1px 5px;
+      }
     }
   }
 }

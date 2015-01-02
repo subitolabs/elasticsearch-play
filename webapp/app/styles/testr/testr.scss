@@ -78,15 +78,35 @@ a.url
       margin-right: 5px;
     }
   }
+
+  .alert
+  {
+    position: relative;
+    padding-left: 60px;
+
+    i
+    {
+      font-size: 3em;
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      margin-top: -20px;
+    }
+  }
 }
 
-#inputAnalysers, #inputFilters
+my-json-editor
 {
-  position: absolute;
+  position: absolute !important;
   top:30px;
   left:0;
   right:0;
   bottom: 0;
+
+  .ace_editor
+  {
+    height: 100%;
+  }
 }
 
 .__h

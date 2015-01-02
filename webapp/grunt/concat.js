@@ -1,8 +1,10 @@
 module.exports = {
     js_me: {
         src: [
+            "<%= yeoman.app %>/scripts/data/*.js",
             "<%= yeoman.app %>/scripts/app.js",
-            "<%= yeoman.app %>/scripts/controllers/*.js"
+            "<%= yeoman.app %>/scripts/controllers/*.js",
+            "<%= yeoman.app %>/scripts/directives/*.js"
         ],
         dest: "<%= yeoman.tmp %>/scripts/testr.js"
     },

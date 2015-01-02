@@ -33,34 +33,16 @@
                       <a ng-click="dialog_filter_add_open=true"><i class="fa fa-folder-open"></i></a>
                       <a ng-click="dialog_filter_add_open=true"><i class="fa fa-plus"></i></a>
                   </div>
-                  <div  id="inputFilters"
-                        ui-ace="{
-                          useWrapMode : true,
-                          showGutter: true,
-                          theme:'github',
-                          mode: 'json',
-                          firstLineNumber: 10,
-                          onLoad: aceLoaded,
-                          onChange: aceChanged
-                        }" ng-model="jsonFilters"></div>
+                  <my-json-editor ng-model="filters"></my-json-editor>
               </div>
 
               <div class="__right">
                   <div class="__h clearfix">
                       <h2>Analyzers</h2>
                       <a ng-click="dialog_url_open=true"><i class="fa fa-folder-open"></i></a>
+                      <a ng-click="dialog_analyzer_add_open=true"><i class="fa fa-plus"></i></a>
                   </div>
-                  <div id="inputAnalysers"
-                       ui-ace="{
-                          useWrapMode : true,
-                          showGutter: true,
-                          theme:'github',
-                          mode: 'json',
-                          firstLineNumber: 10,
-                          onLoad: aceLoaded,
-                          onChange: aceChanged
-                        }"
-                       ng-model="jsonAnalyzers"> </div>
+                  <my-json-editor ng-model="analyzers"></my-json-editor>
               </div>
           </div>
 
@@ -76,6 +58,10 @@
                       </div>
                   </form>
                   <div class="___h"></div>
+                  <div class="alert alert-danger" ng-show="error!=null">
+                      <i class="fa fa-exclamation-triangle"></i>
+                      <p>{{error}}</p>
+                  </div>
                   <table class="table table-striped">
                       <tr ng-repeat="test in tests">
                           <td>{{test.title}}</td>
@@ -89,42 +75,46 @@
               </div>
           </div>
 
-          <div ng-class="{dialog : true, 'dialog--open' : dialog_url_open}">
-              <div class="dialog__overlay"></div>
-              <div class="dialog__content">
-                  <h3><strong>Load</strong> external ressource</h3>
-                  <form class="form-horizontal">
+          <my-dialog title="Available token filters" open="dialog_filter_add_open">
+              <table class="table table-stripped">
+                  <tr ng-repeat="filter in availableFilters">
+                      <td width="100%">
+                          <a ng-click="addFilter(filter)" class="btn btn-primary" title="Add this filter"><i class="fa fa-plus"></i></a>
+                          {{filter.title}}
+                      </td>
+                      <td nowrap><a class="btn btn-default" title="Documentation" href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/{{filter.url}}" target="_blank">?</a></td>
+                  </tr>
+              </table>
+          </my-dialog>
 
-                      <div class="form-group">
-                          <label for="inputLoadURL" class="col-sm-2 control-label">URL:</label>
-                          <div class="col-sm-10">
-                              <input type="url" class="form-control" id="inputLoadURL" placeholder="http://...">
-                          </div>
+          <my-dialog title="New analyzer" open="dialog_analyzer_add_open">
+              <form class="form-horizontal" ng-submit="addAnalyzer()">
+                  <div class="form-group">
+                      <label for="inputNewAnalyzerTokenizer" class="col-sm-2 control-label">Tokenizer:</label>
+                      <div class="col-sm-10">
+                          <select class="form-control" id="inputNewAnalyzerTokenizer" ng-model="analyzer_new.tokenizer">
+                              <option value="standard">Standard</option>
+                              <option value="keyword">Keyword</option>
+                              <option value="letter">Letter</option>
+                              <option value="whitespace">whitespace</option>
+                              <option value="uax_url_email">UAX email URL</option>
+                              <option value="path_hierarchy">Path hierarchy</option>
+                              <option value="whitespace">whitespace</option>
+                              <option value="classic">Classic</option>
+                          </select>
                       </div>
-
-                  </form>
-                  <div><button class="action btn btn-default" ng-click="dialog_url_open=false">Close</button></div>
-              </div>
-          </div>
-
-          <div ng-class="{dialog : true, 'dialog--open' : dialog_filter_add_open}">
-              <div class="dialog__overlay"></div>
-              <div class="dialog__content">
-                  <h3>Available <strong>token filters</strong></h3>
-                  <div class="__inner_max_height">
-                      <table class="table table-stripped">
-                          <tr ng-repeat="filter in availableFilters">
-                              <td width="100%">
-                                  <a ng-click="addFilter(filter)" class="btn btn-primary" title="Add this filter"><i class="fa fa-plus"></i></a>
-                                  {{filter.title}}
-                              </td>
-                              <td nowrap><a class="btn btn-default" title="Documentation" href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/{{filter.url}}" target="_blank"><i class="fa fa-help"></i></a></td>
-                          </tr>
-                      </table>
                   </div>
-                  <div><button class="action btn btn-default" ng-click="dialog_filter_add_open=false">Close</button></div>
-              </div>
-          </div>
+                  <div class="form-group">
+                      <label for="inputNewAnalyzerName" class="col-sm-2 control-label">Name:</label>
+                      <div class="col-sm-10">
+                          <input type="text" class="form-control" id="inputNewAnalyzerName" ng-model="analyzer_new.name">
+                      </div>
+                  </div>
+                  <div>
+                      <input type="submit" class="btn btn-success" value="Ok" />
+                  </div>
+              </form>
+          </my-dialog>
 
       </div>
 
