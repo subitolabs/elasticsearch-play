@@ -20,6 +20,16 @@ class Request extends \Symfony\Component\HttpFoundation\Request
      */
     public static function createFromGlobals()
     {
+        foreach($_GET as $k=>&$v)
+        {
+            $v = json_decode($v, true);
+        }
+
+        foreach($_POST as $k=>&$v)
+        {
+            $v = json_decode($v, true);
+        }
+
         $request = parent::createFromGlobals();
 
         $requestBody = $request->getContent();

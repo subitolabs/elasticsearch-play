@@ -113,14 +113,11 @@
         $inputAnalyzers = $request->get('analyzers');
         $inputFilters   = $request->get('filters');
 
-        if ($inputAnalyzers === false || $inputFilters === false)
+        if ($inputAnalyzers === false || $inputFilters === false || $inputAnalyzers === null || $inputFilters === null)
         {
             throw new \Exception('Parameters are not JSON!');
         }
-
-        //$inputAnalyzers = prefixInput($inputAnalyzers);
-        //$inputFilters   = prefixInput($inputFilters);
-
+       // var_dump($inputAnalyzers, $inputFilters);die();
         return [$inputAnalyzers, $inputFilters];
     }
 
