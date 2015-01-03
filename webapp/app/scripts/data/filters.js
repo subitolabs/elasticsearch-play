@@ -269,5 +269,25 @@ var availableFilters = [
         "title": "Apostrophe",
         "uid": "apostrophe",
         "options": []
+    },
+    {
+        "title" : "ICU normalizer",
+        "uid" : "icu_normalizer",
+        "url" : "https://github.com/elasticsearch/elasticsearch-analysis-icu",
+        "options" : []
+    },
+    {
+        "title" : "ICU folding",
+        "uid" : "icu_folding",
+        "url" : "https://github.com/elasticsearch/elasticsearch-analysis-icu",
+        "options" : []
+    },
+    {
+        "title" : "ICU collation",
+        "uid" : "icu_collation",
+        "url" : "https://github.com/elasticsearch/elasticsearch-analysis-icu",
+        "options" : [
+            {"title":"language", "default" : "en"}
+        ]
     }
 ]

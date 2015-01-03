@@ -1,7 +1,7 @@
 /**
  * var buffer = new Array(); $('.toc a').each(function(i, item) { buffer.push({'title' : $(item).html(), 'url' : $(item).attr('href')}) });
  */
-myApp.controller('testr', ['$scope', '$http', function($scope, $http)
+myApp.controller('testr', ['$scope', '$http', '$document', function($scope, $http, $document)
 {
     $scope.filters          = {"my_word_delimiter" : {"type" : "word_delimiter", "catenate_words" : true, "preserve_original" : true, "generate_word_parts" : false}};
     $scope.tokenizers       = {};
@@ -13,14 +13,21 @@ myApp.controller('testr', ['$scope', '$http', function($scope, $http)
 
     $scope.analyzer_new     = {};
 
-    $scope.sample       = 'François hollande passe à la télévision en slip.';
-    $scope.running      = false;
-    $scope.error        = null;
+    $scope.sample               = 'François Hollande passe à la télévision pour la 15ème fois.';
+    $scope.running              = false;
+    $scope.error                = null;
     $scope.availableFilters     = window.availableFilters;
     $scope.availableTokenizers  = window.availableTokenizers;
 
-    $scope.dialog_filter_add_open       = false;
-    $scope.dialog_analyzer_new_open     = false;
+    $scope.openDialog = function(type)
+    {
+        angular.element(document.getElementById(type + 'Dialog')).addClass('dialog--open');
+    };
+
+    $scope.closeDialog = function()
+    {
+        angular.element(document.getElementsByTagName('my-dialog')).removeClass('dialog--open');
+    };
 
     $scope.run = function()
     {
@@ -30,7 +37,7 @@ myApp.controller('testr', ['$scope', '$http', function($scope, $http)
 
         $http
             .post(
-                'http://local:8080/index.php',
+                API_URL,
                 {filters : $scope.filters, analyzers : $scope.analyzers, text : $scope.sample}
             )
             .success(function(data, status, headers, config)
@@ -50,7 +57,7 @@ myApp.controller('testr', ['$scope', '$http', function($scope, $http)
             {
                 $scope.running = false;
 
-                $scope.error = data.data.message;
+                $scope.error = data;
             });
     };
 
@@ -65,7 +72,7 @@ myApp.controller('testr', ['$scope', '$http', function($scope, $http)
 
         $scope.filters['my_' + filter.uid] = buffer;
 
-        $scope.dialog_filter_add_open = false;
+        $scope.closeDialog();
     };
 
     $scope.addTokenizer = function(tokenizer)
@@ -79,7 +86,7 @@ myApp.controller('testr', ['$scope', '$http', function($scope, $http)
 
         $scope.tokenizers['my_' + tokenizer.uid] = buffer;
 
-        $scope.dialog_tokenizer_add = false;
+        $scope.closeDialog();
     };
 
     $scope.addAnalyzer = function()
@@ -93,11 +100,13 @@ myApp.controller('testr', ['$scope', '$http', function($scope, $http)
                 "filter": []
             };
         }
+
+        $scope.closeDialog();
     };
 
     $scope.saveSettings = function()
     {
-
+        $scope.closeDialog();
     };
 
     $scope.getCompletionTerms = function(type)
@@ -124,6 +133,14 @@ myApp.controller('testr', ['$scope', '$http', function($scope, $http)
 
         return results;
     };
+
+    $document.bind('keyup', function(e)
+    {
+        if (e.which === 27)
+        {
+            $scope.closeDialog();
+        }
+    });
 
     $scope.run();
 }]);

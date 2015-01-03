@@ -1,8 +1,6 @@
-<div ng-class="{dialog : true, 'dialog--open' : open}">
-    <div class="dialog__overlay"></div>
-    <div class="dialog__content">
-        <a ng-click="open=false" class="___c"><i class="fa fa-times"></i></a>
-        <h3>{{title}}</h3>
-        <div class="__inner_max_height" ng-transclude></div>
-    </div>
+<div class="dialog__overlay"></div>
+<div class="dialog__content">
+    <a ng-click="close()" href="#" class="___c"><i class="fa fa-times"></i></a>
+    <h3>{{title}}</h3>
+    <div class="__inner_max_height" ng-transclude></div>
 </div>

@@ -37,20 +37,38 @@
         ]
     ]);
 
-    $outputTests = [];
+    $outputTests    = [];
+    $tries          = 0;
 
-    foreach($inputAnalyzers as $analyzer => $analyzerData)
+    while(true)
     {
-        $tokens = $esClient->indices()->analyze([
-            'index'     => $prefix,
-            'analyzer'  => $analyzer,
-            'text'      => $inputText
-        ]);
+        usleep(100 * 1000);
 
-        $outputTests[] = [
-            'title'     => $analyzer,
-            'tokens'    => $tokens['tokens']
-        ];
+        try
+        {
+            foreach ($inputAnalyzers as $analyzer => $analyzerData)
+            {
+                $tokens = $esClient->indices()->analyze([
+                    'index' => $prefix,
+                    'analyzer' => $analyzer,
+                    'text' => $inputText
+                ]);
+
+                $outputTests[] = [
+                    'title' => $analyzer,
+                    'tokens' => $tokens['tokens']
+                ];
+            }
+
+            break;
+        }
+        catch(\Exception $e)
+        {
+            if ($tries++ > 10)
+            {
+                throw $e;
+            }
+        }
     }
 
     //var_dump($prefix, $inputAnalyzers, $inputFilters);die();
@@ -133,7 +151,7 @@
             throw new \Exception('REMOTE_ADDR or HTTP_USER_AGENT is missing!');
         }
 
-        return md5($ip . '_' . $ua) . '_';
+        return md5($ip . '_' . $ua);
     }
 
     function prefixInput($input)

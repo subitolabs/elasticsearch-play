@@ -1,8 +1,10 @@
 module.exports = {
     options: {
-        sourceMap: false,
+        sourceMap: true,
         mangle: true,
-        banner: "/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today(\"yyyy-mm-dd\") %> */"
+        preserveComments: false,
+        compress: true,
+        beautify: false
     },
     dist: {
         expand: true,

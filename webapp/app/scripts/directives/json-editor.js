@@ -14,7 +14,7 @@ myApp.directive('myJsonEditor', [function()
             editorSession   = editor.getSession();
 
             editorSession.setMode('ace/mode/json');
-            editorSession.setTabSize(2);
+            editorSession.setTabSize(4);
             editorSession.setUseWrapMode(true);
             editorSession.setFoldStyle('markbeginend');
             editor.$blockScrolling = 999999;

@@ -80,5 +80,6 @@ var availableTokenizers = [
         {"title": "max_token_length", "default": 255}
     ]
 },
-    {"title": "Thai Tokenizer", "url": "analysis-thai-tokenizer.html", "uid": "thai"}
+    {"title": "Thai Tokenizer", "url": "analysis-thai-tokenizer.html", "uid": "thai"},
+    {"title" : "ICU", "uid":"icu_tokenizer", "url" : "https://github.com/elasticsearch/elasticsearch-analysis-icu"}
 ];

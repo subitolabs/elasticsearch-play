@@ -2,16 +2,20 @@ myApp.directive('myDialog', [function()
 {
     return {
         restrict: 'E',
-        replace: true,
+        replace: false,
         transclude: true,
         templateUrl: '/views/dialog.html',
         scope: {
-            'title' : '@',
-            'open' : '='
+            'title' : '@'
         },
-        link: function(scope)
+        link: function(scope, root)
         {
+            root.addClass('dialog');
 
+            scope.close = function()
+            {
+                root.removeClass('dialog--open');
+            };
         }
     };
 }]);

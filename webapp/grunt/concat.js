@@ -11,8 +11,8 @@ module.exports = {
     js_vendor: {
         src: [
             "<%= yeoman.vendor %>/angular/angular.js",
-            "<%= yeoman.vendor %>/angular-resource/angular-resource.js",
             "<%= yeoman.vendor %>/angular-sanitize/angular-sanitize.js",
+            "<%= yeoman.vendor %>/angular-route/angular-route.js",
             "<%= yeoman.vendor %>/ace-builds/src-noconflict/ace.js",
             "<%= yeoman.vendor %>/ace-builds/src-noconflict/ext-language_tools.js",
             "<%= yeoman.vendor %>/ace-builds/src-noconflict/ext-textarea.js",
