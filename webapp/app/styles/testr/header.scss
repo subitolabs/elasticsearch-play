@@ -21,7 +21,19 @@ header
   a
   {
     display: inline-block;
-    line-height: 40px;
     color: #fff;
+    text-align: center;
+    background: #1c8b8b;
+    margin-top: 2px;
+    padding: 5px;
+    font-size: 1.3em;
+    width: 35px;
+    height: 35px;
+
+    &:hover
+    {
+      background: #166969;
+      color:#fff;
+    }
   }
 }

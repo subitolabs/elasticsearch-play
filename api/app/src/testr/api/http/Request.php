@@ -14,14 +14,14 @@ class Request extends \Symfony\Component\HttpFoundation\Request
     {
         $value = parent::get($name);
 
-        if (empty($value))
-        {
-            throw new \Exception($name . ' is empty!');
-        }
-
         if (is_array($value))
         {
             return $value;
+        }
+
+        if (empty($value))
+        {
+            throw new \Exception($name . ' is empty!');
         }
 
         $value = json_decode($value, true);

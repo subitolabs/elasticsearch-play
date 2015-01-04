@@ -3,8 +3,10 @@
         <small>filters tokenizers analyzers</small>
     </h1>
     <div class="pull-right loading-hide">
-        <a ng-click="openDialog('settings')" href="#"><i class="fa fa-gears"></i> Settings</a>
-        <a ng-click="openDialog('about')" href="#"><i class="fa fa-beer"></i> About</a>
+        <a ng-href="#/" title="Open an index"><i class="fa  fa-folder-open"></i></a>
+        <a ng-click="openDialog('save')" href="javascript:void(0)" title="Save this index"><i class="fa  fa-save"></i></a>
+        <a ng-click="openDialog('settings')" href="javascript:void(0)" title="Settings"><i class="fa fa-gears"></i></a>
+        <a ng-click="openDialog('about')" href="javascript:void(0)" title="About ElasticSearch Testr"><i class="fa fa-beer"></i></a>
     </div>
 </header>
 
@@ -17,21 +19,21 @@
             <ui-layout-container>
                 <div class="__h clearfix">
                     <h2>Filters</h2>
-                    <a ng-click="openDialog('filterAdd')" href="#"><i class="fa fa-plus"></i></a>
+                    <a ng-click="openDialog('filterAdd')" href="javascript:void(0)"><i class="fa fa-plus"></i></a>
                 </div>
                 <my-json-editor ng-model="filters"></my-json-editor>
             </ui-layout-container>
             <ui-layout-container>
                 <div class="__h clearfix">
                     <h2>Tokenizers</h2>
-                    <a ng-click="openDialog('tokenizerAdd')" href="#"><i class="fa fa-plus"></i></a>
+                    <a ng-click="openDialog('tokenizerAdd')" href="javascript:void(0)"><i class="fa fa-plus"></i></a>
                 </div>
                 <my-json-editor ng-model="tokenizers"></my-json-editor>
             </ui-layout-container>
             <ui-layout-container>
                 <div class="__h clearfix">
                     <h2>Analyzers</h2>
-                    <a ng-click="openDialog('analyzerAdd')" href="#"><i class="fa fa-plus"></i></a>
+                    <a ng-click="openDialog('analyzerAdd')" href="javascript:void(0)"><i class="fa fa-plus"></i></a>
                 </div>
                 <my-json-editor ng-model="analyzers"></my-json-editor>
             </ui-layout-container>
@@ -133,7 +135,7 @@
     </form>
 </my-dialog>
 
-<my-dialog id="settingsDialog" title="About this application">
+<my-dialog id="settingsDialog" title="Settings (not working yet..)">
     <form class="form-horizontal" ng-submit="saveSettings()">
         <div class="form-group">
             <label for="inputSettingsFontSize" class="col-sm-4 control-label">Editor font size:</label>
@@ -172,4 +174,18 @@
         <a href="https://github.com/ebuildy/elasticsearch-testr" target="_blank" class="btn btn-success"><i
                 class="fa fa-github"></i> github.com/ebuildy/elasticsearch-testr</a>
     </p>
+</my-dialog>
+
+<my-dialog id="saveDialog" title="Save this index">
+    <div class="alert alert-info text-left">
+        <i class="fa fa-save"></i> The index is automatically saved when you run a test, you can bookmark this URL, it's your own index now!
+    </div>
+</my-dialog>
+
+<my-dialog id="loadingIndexDialog" title="Loading index" class="dialog--open">
+    <div class="alert alert-info text-left">
+        We are loading the index, it will be automatically saved when you run a test, you can bookmark this URL, it's your own index now!
+    </div>
+    <br />
+    <div class="alert alert-danger" ng-hide="loadingIndexError==null">{{loadingIndexError}}</div>
 </my-dialog>

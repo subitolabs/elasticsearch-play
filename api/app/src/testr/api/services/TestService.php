@@ -16,10 +16,11 @@ class TestService
 {
     public function run(Request $request)
     {
-        $inputAnalyzers = $request->getJSONObject('analyzers');
-        $inputFilters   = $request->getJSONObject('filters');
-        $inputText      = $request->getString('text', 0, 5000);
-        $inputIndex     = $request->getString('index', 0, 128);
+        $inputAnalyzers     = $request->getJSONObject('analyzers');
+        $inputFilters       = $request->getJSONObject('filters');
+        $inputTokenizers    = $request->getJSONObject('tokenizers');
+        $inputText          = $request->getString('text', 0, 5000);
+        $inputIndex         = $request->getString('index', 0, 128);
 
         $esClient = new Client();
 
@@ -35,8 +36,10 @@ class TestService
                     'number_of_shards'      => 1,
                     'number_of_replicas'    => 0,
                     'analysis'              => [
-                        'filter'   => $inputFilters,
-                        'analyzer' => $inputAnalyzers
+                        'text'      => $inputText,
+                        'filter'    => $inputFilters,
+                        'tokenizer' => $inputTokenizers,
+                        'analyzer'  => $inputAnalyzers
                     ]
                 ]
             ]
@@ -65,7 +68,7 @@ class TestService
                     ];
                 }
 
-                break;
+                return ['tests' => $outputTests];
             }
             catch(\Exception $e)
             {

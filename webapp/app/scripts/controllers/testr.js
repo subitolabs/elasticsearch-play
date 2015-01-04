@@ -1,11 +1,13 @@
 /**
  * var buffer = new Array(); $('.toc a').each(function(i, item) { buffer.push({'title' : $(item).html(), 'url' : $(item).attr('href')}) });
  */
-testr.app.controller('testr', ['$scope', '$http', '$document', function($scope, $http, $document)
+testr.app.controller('testr', ['$scope', '$http', '$document', '$routeParams',
+    function($scope, $http, $document, $routeParams)
 {
-    $scope.filters          = {"my_word_delimiter" : {"type" : "word_delimiter", "catenate_words" : true, "preserve_original" : true, "generate_word_parts" : false}};
+    $scope.filters          = {};
     $scope.tokenizers       = {};
-    $scope.analyzers        = {"standard" : {"type" : "standard"}, "french" : {"type" : "french"}};
+    $scope.analyzers        = {};
+    $scope.index            = $routeParams.index;
 
     $scope.settings = {
       'font_size' : 14
@@ -13,7 +15,7 @@ testr.app.controller('testr', ['$scope', '$http', '$document', function($scope, 
 
     $scope.analyzer_new     = {};
 
-    $scope.sample               = 'François Hollande passe à la télévision pour la 15ème fois.';
+    $scope.sample               = 'François Hollande passe à la télévision pour la 15ème fois ce mois-ci.';
     $scope.running              = false;
     $scope.error                = null;
     $scope.availableFilters     = window.availableFilters;
@@ -38,7 +40,7 @@ testr.app.controller('testr', ['$scope', '$http', '$document', function($scope, 
         $http
             .post(
                 testr.api + 'test',
-                {filters : $scope.filters, analyzers : $scope.analyzers, text : $scope.sample, index : testr.data.index}
+                {filters : $scope.filters, tokenizers : $scope.tokenizers, analyzers : $scope.analyzers, text : $scope.sample, index : $scope.index}
             )
             .success(function(data, status, headers, config)
             {
@@ -142,5 +144,38 @@ testr.app.controller('testr', ['$scope', '$http', '$document', function($scope, 
         }
     });
 
-    $scope.run();
+    $http.post(testr.api + 'open', {index : $scope.index})
+        .success(function(data, status, headers, config)
+        {
+            if (data.status === 200)
+            {
+                data = data.data;
+
+                $scope.sample = data.text;
+
+                if (data.hasOwnProperty('analyzer')) {
+                    $scope.analyzers = data.analyzer;
+                }
+
+                if (data.hasOwnProperty('tokenizer')) {
+                    $scope.tokenizers = data.tokenizer;
+                }
+
+                if (data.hasOwnProperty('filter')) {
+                    $scope.filters = data.filter;
+                }
+
+                $scope.run();
+            }
+            else
+            {
+                $scope.loadingIndexError = data.data.message;
+            }
+
+            $scope.closeDialog();
+        }).
+        error(function(data, status, headers, config)
+        {
+            alert(data);
+        });
 }]);
