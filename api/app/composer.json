@@ -3,5 +3,10 @@
     "pimple/pimple" :  "~3.0",
     "silex/silex": "dev-master",
     "elasticsearch/elasticsearch" : "dev-master"
+  },
+  "autoload": {
+    "psr-0": {
+      "testr": "src/"
+    }
   }
 }

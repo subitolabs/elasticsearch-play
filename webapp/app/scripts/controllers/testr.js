@@ -1,7 +1,7 @@
 /**
  * var buffer = new Array(); $('.toc a').each(function(i, item) { buffer.push({'title' : $(item).html(), 'url' : $(item).attr('href')}) });
  */
-myApp.controller('testr', ['$scope', '$http', '$document', function($scope, $http, $document)
+testr.app.controller('testr', ['$scope', '$http', '$document', function($scope, $http, $document)
 {
     $scope.filters          = {"my_word_delimiter" : {"type" : "word_delimiter", "catenate_words" : true, "preserve_original" : true, "generate_word_parts" : false}};
     $scope.tokenizers       = {};
@@ -37,8 +37,8 @@ myApp.controller('testr', ['$scope', '$http', '$document', function($scope, $htt
 
         $http
             .post(
-                API_URL,
-                {filters : $scope.filters, analyzers : $scope.analyzers, text : $scope.sample}
+                testr.api + 'test',
+                {filters : $scope.filters, analyzers : $scope.analyzers, text : $scope.sample, index : testr.data.index}
             )
             .success(function(data, status, headers, config)
             {

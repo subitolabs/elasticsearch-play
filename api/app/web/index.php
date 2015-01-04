@@ -6,78 +6,28 @@
     header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 
     require_once __DIR__.'/../vendor/autoload.php';
-    require_once __DIR__ . '/../src/testr/Request.php';
+//var_dump($_SERVER, $_GET);die();
+    $request    = \testr\api\http\Request::createFromGlobals();
 
-    $request    = \testr\Request::createFromGlobals();
-    $prefix     = getPrefix();
-    $esClient   = getElasticSearchClient();
+    $requestUri = trim($request->getRequestUri(), '\\/');
 
     init();
 
-    list($inputAnalyzers, $inputFilters) = getInputs();
+    $service    = strpos($requestUri, '?') === false ? $requestUri : substr($requestUri, 0, strpos($requestUri, '?'));
+    $services   = ['test' => 'Test', 'open' => 'OpenIndex'];
 
-    $inputText = $request->get('text');
-
-    if ($esClient->indices()->exists(['index' => $prefix]))
+    if (!isset($services[$service]))
     {
-        $esClient->indices()->delete(['index' => $prefix]);
+        throw new \Exception('Bad service name!');
     }
 
-    $esClient->indices()->create([
-        'index' => $prefix,
-        'body'  => [
-            'settings' => [
-                'number_of_shards'      => 1,
-                'number_of_replicas'    => 0,
-                'analysis'              => [
-                    'filter'   => $inputFilters,
-                    'analyzer' => $inputAnalyzers
-                ]
-            ]
-        ]
-    ]);
+    $serviceClass = 'testr\api\services\\' . $services[$service] . 'Service';
 
-    $outputTests    = [];
-    $tries          = 0;
+    $serviceInstance = new $serviceClass();
 
-    while(true)
-    {
-        usleep(100 * 1000);
+    $responseData = $serviceInstance->run($request);
 
-        try
-        {
-            foreach ($inputAnalyzers as $analyzer => $analyzerData)
-            {
-                $tokens = $esClient->indices()->analyze([
-                    'index' => $prefix,
-                    'analyzer' => $analyzer,
-                    'text' => $inputText
-                ]);
-
-                $outputTests[] = [
-                    'title' => $analyzer,
-                    'tokens' => $tokens['tokens']
-                ];
-            }
-
-            break;
-        }
-        catch(\Exception $e)
-        {
-            if ($tries++ > 10)
-            {
-                throw $e;
-            }
-        }
-    }
-
-    //var_dump($prefix, $inputAnalyzers, $inputFilters);die();
-
-    //$tests = runTest($inputAnalyzers);
-
-    renderResponse(200, [
-        'tests' => $outputTests
-    ]);
+    renderResponse(200, $responseData);
 
     function renderResponse($status, $data)
     {
@@ -108,7 +58,7 @@
             renderResponse(500, [
                 'error'     => 'exception',
                 'message'   => $e->getMessage(),
-                'file'      => $e->getFile(),
+                'file'      => str_replace(realpath(__DIR__ . '/..'), '', $e->getFile()),
                 'line'      => $e->getLine()
             ]);
         });
@@ -118,62 +68,12 @@
             renderResponse(500, [
                 'error'     => $error,
                 'message'   => $message,
-                'file'      => $file,
+                'file'      => str_replace(realpath(__DIR__ . '/..'), '', $file),
                 'line'      => $line
             ]);
         });
     }
 
-    function getInputs()
-    {
-        global $request;
-
-        $inputAnalyzers = $request->get('analyzers');
-        $inputFilters   = $request->get('filters');
-
-        if ($inputAnalyzers === false || $inputFilters === false || $inputAnalyzers === null || $inputFilters === null)
-        {
-            throw new \Exception('Parameters are not JSON!');
-        }
-       // var_dump($inputAnalyzers, $inputFilters);die();
-        return [$inputAnalyzers, $inputFilters];
-    }
-
-    function getPrefix()
-    {
-        global $request;
-
-        $ip = $request->server->get('REMOTE_ADDR');
-        $ua = $request->server->get('HTTP_USER_AGENT');
-
-        if (empty($ip) || empty($ua))
-        {
-            throw new \Exception('REMOTE_ADDR or HTTP_USER_AGENT is missing!');
-        }
-
-        return md5($ip . '_' . $ua);
-    }
-
-    function prefixInput($input)
-    {
-        global $prefix;
-
-        $buffer = [];
-
-        foreach($input as $k => $v)
-        {
-            $buffer[$prefix . $k] = $v;
-        }
-
-        return $buffer;
-    }
-
-    function getElasticSearchClient()
-    {
-        $client = new Elasticsearch\Client();
-
-        return $client;
-    }
 
 
 
