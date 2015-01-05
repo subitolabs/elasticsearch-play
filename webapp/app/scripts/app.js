@@ -11,18 +11,15 @@ var myApp = angular.module('testr', ['ngSanitize', 'ngRoute', 'ui.layout'])
             templateUrl: "views/welcome.html",
             controller: 'welcome'
         })
-            .when('/index/:index', {
-                templateUrl: "views/testr.html",
-                controller: 'testr'
-            }).otherwise({
-                redirectTo: '/'
-            });
+        .when('/testr/:index', {
+            templateUrl: "views/testr.html",
+            controller: 'testr'
+        }).otherwise({
+            redirectTo: '/'
+        });
     }]);
 
 var testr = {
-    'api': 'http://local:8080/',
-    'app': myApp,
-    'data' : {
-        'index' : ''
-    }
+    'api': '/api/',
+    'app': myApp
 };

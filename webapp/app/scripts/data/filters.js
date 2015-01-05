@@ -74,7 +74,7 @@ var availableFilters = [
     },
     {
         "title": "Word Delimiter",
-        "uid": "word",
+        "uid": "word_delimiter",
         "options": [
             {"title": "generate_word_parts", "default": true},
             {"title": "generate_number_parts", "default": true},
@@ -288,6 +288,15 @@ var availableFilters = [
         "url" : "https://github.com/elasticsearch/elasticsearch-analysis-icu",
         "options" : [
             {"title":"language", "default" : "en"}
+        ]
+    },
+    {
+        "title" : "Phonetic",
+        "uid" : "phonetic",
+        "url" : "https://github.com/elasticsearch/elasticsearch-analysis-phonetic",
+        "options" : [
+            {"title":"replace", "default" : true},
+            {"title":"encoder", "default" : "metaphone"}
         ]
     }
 ]

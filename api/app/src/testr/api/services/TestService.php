@@ -19,8 +19,8 @@ class TestService
         $inputAnalyzers     = $request->getJSONObject('analyzers');
         $inputFilters       = $request->getJSONObject('filters');
         $inputTokenizers    = $request->getJSONObject('tokenizers');
-        $inputText          = $request->getString('text', 0, 5000);
-        $inputIndex         = $request->getString('index', 0, 128);
+        $inputText          = $request->getString('text', 2, 5000);
+        $inputIndex         = $request->getString('index', 2, 128);
 
         $esClient = new Client();
 

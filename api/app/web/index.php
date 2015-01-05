@@ -13,7 +13,7 @@
 
     init();
 
-    $service    = strpos($requestUri, '?') === false ? $requestUri : substr($requestUri, 0, strpos($requestUri, '?'));
+    $service    = str_replace('api/', '', strpos($requestUri, '?') === false ? $requestUri : substr($requestUri, 0, strpos($requestUri, '?')));
     $services   = ['test' => 'Test', 'open' => 'OpenIndex'];
 
     if (!isset($services[$service]))

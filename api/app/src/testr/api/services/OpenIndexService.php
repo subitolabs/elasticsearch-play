@@ -17,7 +17,7 @@ class OpenIndexService
 {
     public function run(Request $request)
     {
-        $inputIndex     = $request->getString('index', 3, 128);
+        $inputIndex     = $request->getString('index', 2, 128);
         $esClient       = new Client();
 
         if (!$esClient->indices()->exists(['index' => $inputIndex]))

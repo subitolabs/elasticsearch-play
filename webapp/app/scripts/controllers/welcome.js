@@ -20,7 +20,7 @@ myApp.controller('welcome', ['$scope', '$http', '$location', function($scope, $h
             {
                 $scope.running = false;
 
-
+                $location.path('/testr/' + $scope.session_name);
             }).
             error(function(data, status, headers, config)
             {
