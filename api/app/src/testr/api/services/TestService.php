@@ -45,8 +45,9 @@ class TestService
             ]
         ]);
 
-        $outputTests    = [];
         $tries          = 0;
+        $testAnalyzers  = [];
+        $testFilters    = [];
 
         while(true)
         {
@@ -54,7 +55,7 @@ class TestService
 
             try
             {
-                foreach ($inputAnalyzers as $analyzer => $analyzerData)
+                foreach($inputAnalyzers as $analyzer => $analyzerData)
                 {
                     $tokens = $esClient->indices()->analyze([
                         'index'     => $inputIndex,
@@ -62,13 +63,33 @@ class TestService
                         'text'      => $inputText
                     ]);
 
-                    $outputTests[] = [
+                    $testAnalyzers[] = [
                         'title'     => $analyzer,
                         'tokens'    => $tokens['tokens']
                     ];
                 }
 
-                return ['tests' => $outputTests];
+                foreach($inputFilters as $filter => $filterData)
+                {
+                    $tokens = $esClient->indices()->analyze([
+                        'index'     => $inputIndex,
+                        'filters'   => $filter,
+                        'tokenizer' => 'whitespace',
+                        'text'      => $inputText
+                    ]);
+
+                    $testFilters[] = [
+                        'title'     => $filter,
+                        'tokens'    => $tokens['tokens']
+                    ];
+                }
+
+                return [
+                    'tests' => [
+                        'filters'   => $testFilters,
+                        'analyzers' => $testAnalyzers
+                    ]
+                ];
             }
             catch(\Exception $e)
             {

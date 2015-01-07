@@ -20,6 +20,6 @@ var myApp = angular.module('testr', ['ngSanitize', 'ngRoute', 'ui.layout'])
     }]);
 
 var testr = {
-    'api': '/api/',
+    'api': 'http://es.subitolabs.com/api/',
     'app': myApp
 };

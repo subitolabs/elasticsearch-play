@@ -176,6 +176,5 @@ testr.app.controller('testr', ['$scope', '$http', '$document', '$routeParams',
         }).
         error(function(data, status, headers, config)
         {
-            alert(data);
         });
 }]);

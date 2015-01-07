@@ -33,10 +33,21 @@ myApp.directive('myJsonEditor', [function()
                 }
             }];
 
+            editor.on('blur', function()
+            {
+                try {
+                    var buffer = JSON.parse(editorSession.getValue());
+
+                    editorSession.setValue(JSON.stringify(buffer, null, 4));
+                }
+                catch (e) {
+                }
+            });
+
             editorSession.on('change', function(e)
             {
-                if (angular.isDefined(e)) {
-
+                if (angular.isDefined(e))
+                {
                     clearTimeout(tmrChanged);
 
                     tmrChanged = setTimeout(function()
@@ -65,7 +76,8 @@ myApp.directive('myJsonEditor', [function()
                     catch (e) {
                     }
 
-                    if (newValue !== oldValue) {
+                    if (newValue !== oldValue)
+                    {
                         editorSession.setValue(newValue);
                     }
                 }

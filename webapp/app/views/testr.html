@@ -43,7 +43,7 @@
 
     <ui-layout-container class="results">
         <div class="__h clearfix">
-            <h2>Live test</h2>
+            <h2>Test</h2>
         </div>
         <div ng-class="{__body : true, loading : running}">
             <form ng-submit="run()">
@@ -60,8 +60,18 @@
                 <p>{{error}}</p>
             </div>
             <table class="table table-striped">
-                <tr ng-repeat="test in tests">
-                    <td>{{test.title}}</td>
+                <tr ng-repeat="test in tests.analyzers">
+                    <td>Analyzer</td>
+                    <td><strong>{{test.title}}</strong></td>
+                    <td>
+                                  <span ng-repeat="token in test.tokens" class="label label-primary">
+                                      {{token.token}}
+                                  </span>
+                    </td>
+                </tr>
+                <tr ng-repeat="test in tests.filters">
+                    <td>Filter</td>
+                    <td><strong>{{test.title}}</strong></td>
                     <td>
                                   <span ng-repeat="token in test.tokens" class="label label-primary">
                                       {{token.token}}
@@ -75,8 +85,11 @@
 </ui-layout>
 
 <my-dialog id="filterAddDialog" title="Available token filters">
+    <div style="margin-bottom: 5px">
+        <input class="form-control" placeholder="Search filter..." ng-model="filtersSearchFilter.title" />
+    </div>
     <table class="table table-stripped">
-        <tr ng-repeat="filter in availableFilters">
+        <tr ng-repeat="filter in availableFilters | filter:filtersSearchFilter">
             <td width="100%">
                 <a ng-click="addFilter(filter)" class="btn btn-primary" title="Add this filter"><i
                         class="fa fa-plus"></i></a>
