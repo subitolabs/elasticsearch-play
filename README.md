@@ -4,6 +4,8 @@ Play with elasticSearch filters, tokenizers and analyzers online without install
 
 ### Screenhots
 
+![alt tag](https://raw.githubusercontent.com/subitolabs/elasticsearch-play/gh-pages/images/screenshot1.jpg)
+
 ### Technologies
 
 #### Front stack
