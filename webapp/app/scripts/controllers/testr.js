@@ -37,6 +37,8 @@ testr.app.controller('testr', ['$scope', '$http', '$document', '$routeParams',
         $scope.error    = null;
         $scope.tests    = null;
 
+        ga('send', 'event', 'run', 'test', 'run test', 1);
+
         $http
             .post(
                 testr.api + 'test',
