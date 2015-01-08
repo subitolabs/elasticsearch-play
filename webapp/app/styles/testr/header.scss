@@ -20,15 +20,17 @@ header
 
   a
   {
-    display: inline-block;
+    display: block;
     color: #fff;
     text-align: center;
     background: #1c8b8b;
-    margin-top: 2px;
-    padding: 5px;
-    font-size: 1.3em;
-    width: 35px;
-    height: 35px;
+    font-size: 1em;
+    width: 30px;
+    height: 30px;
+    float: left;
+    border-radius: 15px;
+    margin: 5px 5px 0 0;
+    line-height: 30px;
 
     &:hover
     {
