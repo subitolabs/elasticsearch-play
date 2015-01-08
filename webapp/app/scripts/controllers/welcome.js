@@ -1,32 +1,9 @@
-myApp.controller('welcome', ['$scope', '$http', '$location', function($scope, $http, $location)
+myApp.controller('welcome', ['$scope', '$location', function($scope, $location)
 {
-    $scope.session_name = "";
-    $scope.random_index =  Math.random().toString(36).replace(/[^a-z0-9]+/g, '').substr(1, 33);
-
-    $scope.running      = false;
-    $scope.error        = null;
+    $scope.formData = {index : Math.random().toString(36).replace(/[^a-z0-9]+/g, '').substr(1, 33)};
 
     $scope.open = function()
     {
-        $scope.running  = true;
-        $scope.error    = null;
-
-        $http
-            .post(
-            API_URL + 'open',
-            {uid : $scope.session_name}
-        )
-            .success(function(data, status, headers, config)
-            {
-                $scope.running = false;
-
-                $location.path('/testr/' + $scope.session_name);
-            }).
-            error(function(data, status, headers, config)
-            {
-                $scope.running = false;
-
-                $scope.error = data;
-            });
+        $location.path('/testr/' + $scope.formData.index);
     };
 }]);

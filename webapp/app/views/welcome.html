@@ -1,14 +1,11 @@
 <my-dialog id="welcomeDialog" title="Welcome to ElasticSearch online testr" class="dialog--open">
     <p class="text-justify">Your best friend to test <strong>elasticsearch analyzers, tokenizers and token filters</strong> online. This will create a real ElasticSearch index that you can save/r-open later.</p>
-    <div>
-        <a ng-href="/#/testr/{{random_index}}" class="btn btn-primary">let's create a new index !</a>
-    </div>
     <div class="_a">
-        <p>Open an existing ElasticSearch index:</p>
+        <p>Open elasticSearch index:</p>
         <form ng-submit="open()">
-            <input placeholder="Enter session code here" class="form-control" />
-            <div>
-                <br />
+            <input type="text" placeholder="Enter session code here" class="form-control text-center" ng-model="formData.index" />
+
+            <div style="margin-top:10px">
                 <input type="submit" class="btn btn-success" value="Open" />
             </div>
         </form>
