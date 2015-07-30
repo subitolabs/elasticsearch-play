@@ -136,6 +136,7 @@ var availableFilters = [
         "uid": "synonym",
         "options": [
             {"title": "synonyms", "default": ["universe, cosmos", "€, euro, euros"]}
+            {"title": "tokenizer", "default": "whitespace"}
         ]
     },
     {
