@@ -1,0 +1,14 @@
+elasticsearch:
+  image: elasticsearch:1.7
+  ports:
+    - 9200:9200
+
+api:
+  image: ebuildy/docker-nginx-php
+  ports:
+    - 80:80
+  volumes:
+    - ./config/api:/var/config:ro
+    - ../api:/var/www:rw
+  links:
+    - elasticsearch
