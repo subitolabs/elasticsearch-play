@@ -1,16 +1,87 @@
-<my-dialog id="welcomeDialog" title="Welcome to ElasticSearch online testr" class="dialog--open">
-    <p class="text-justify">Your best friend to test <strong>elasticsearch analyzers, tokenizers and token filters</strong> online. This will create a real ElasticSearch index that you can save/r-open later.</p>
-    <div class="_a">
-        <p>Open elasticSearch index:</p>
-        <form ng-submit="open()">
-            <input type="text" placeholder="Enter session code here" class="form-control text-center" ng-model="formData.index" />
+<div id="home">
 
-            <div style="margin-top:10px">
-                <input type="submit" class="btn btn-success" value="Open" />
+    <div class="container">
+
+        <h1 class="pull-left">ElasticSearch TestR, filters - tokenizers - analyzers</h1>
+
+    </div>
+
+    <div class="container catchline">
+        <p>Your best friend to test <strong>elasticsearch analyzers, tokenizers and token filters</strong> online. This tool creates a real ElasticSearch index that you can save/r-open later.</p>
+    </div>
+
+    <div class="container">
+
+        <br />
+
+        <h2>Getting started</h2>
+
+        <div class="row">
+            <div class="col-lg-3 col-sm-4">
+                <h4>Blank session</h4>
+                <a class="btn btn-success btn-block" ng-click="openFromScratch()">Start from scratch</a>
+            </div>
+            <div class="col-lg-3 col-sm-4 col-lg-offset-1">
+                <div class="_a">
+                    <h4>Open examples</h4>
+
+                    <a class="btn btn-success btn-block" ng-click="openFromSample('basic')">Basic</a>
+
+                    <a class="btn btn-success btn-block" ng-click="openFromSample('french')">French</a>
+
+                    <a class="btn btn-success btn-block" ng-click="openFromSample('path')">Path</a>
+
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-4 col-lg-offset-1">
+                <div class="_a">
+                    <h4>Open existing</h4>
+                    <form ng-submit="openExisting()">
+                        <input type="text" placeholder="Enter session code here" class="form-control text-center" ng-model="formData.index" />
+
+                        <div style="margin-top:10px">
+                            <input type="submit" class="btn btn-success btn-block" value="Open existing session" />
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <br />
+
+    </div>
+
+</div>
+
+    <div class="container">
+
+        <h2>Help us to spread the world</h2>
+
+        <div class="text-center">
+            <div class="addthis_sharing_toolbox"></div>
+        </div>
+
+        <br />
+
+        <div class="row">
+
+            <div class="col-sm-6 testimonial">
+                <img src="http://ebuildy.com/img/foto.jpg" />
+                <h4>Thomas Decaux, Qwant</h4>
+                <p>I use this tool everyday day</p>
             </div>
 
-        </form>
+            <div class="col-sm-6 testimonial">
+                <img src="/images/testimonials/2.jpg" />
+                <h4>Peter, Bizlunch CTO</h4>
+                <p>Thanks to SubitoLabs, all the team can test easily elasticsearch and improve our relevancy.</p>
+            </div>
+
+        </div>
+
+        <br />
+
+        <p class="catchline">You love this product? Tell us on <a href="https://twitter.com/subitolabs" target="_blank">twitter/subitolabs</a></p>
+
     </div>
-    <!-- Go to www.addthis.com/dashboard to customize your tools -->
-    <div class="addthis_sharing_toolbox"></div>
-</my-dialog>

@@ -2,14 +2,13 @@
 
 header
 {
-  background:$bz_background_green_logo;
+  background: white;
   height:40px;
   padding: 0 10px;
 
   h1
   {
     margin-top: 4px;
-    color: #fff;
     font-size: 30px;
 
     small
@@ -23,7 +22,7 @@ header
     display: block;
     color: #fff;
     text-align: center;
-    background: #1c8b8b;
+    background: $blue_1;
     font-size: 1em;
     width: 30px;
     height: 30px;

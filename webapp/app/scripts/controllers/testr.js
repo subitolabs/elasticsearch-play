@@ -15,11 +15,12 @@ testr.app.controller('testr', ['$scope', '$http', '$document', '$routeParams',
 
     $scope.analyzer_new     = {};
 
-    $scope.sample               = 'François Hollande passe à la télévision pour la 15ème fois ce mois-ci.';
+    $scope.sample               = '';
     $scope.running              = false;
     $scope.error                = null;
     $scope.availableFilters     = window.availableFilters;
     $scope.availableTokenizers  = window.availableTokenizers;
+    $scope.availableAnalyzers   = window.availableAnalyzers;
 
     $scope.openDialog = function(type)
     {
@@ -93,17 +94,18 @@ testr.app.controller('testr', ['$scope', '$http', '$document', '$routeParams',
         $scope.closeDialog();
     };
 
-    $scope.addAnalyzer = function()
+    $scope.addAnalyzer = function(analyzer)
     {
         $scope.dialog_analyzer_new_open = false;
 
-        if ($scope.analyzer_new.hasOwnProperty('name') && $scope.analyzer_new.name !== "") {
-            $scope.analyzers[$scope.analyzer_new.name] = {
-                "type": "custom",
-                "tokenizer": $scope.analyzer_new.tokenizer,
-                "filter": []
-            };
-        }
+        var buffer = {"type" : analyzer.uid};
+
+        angular.forEach(analyzer.options, function(option)
+        {
+            buffer[option.title] = option.default;
+        });
+
+        $scope.analyzers['my_' + analyzer.uid] = buffer;
 
         $scope.closeDialog();
     };

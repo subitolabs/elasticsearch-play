@@ -1,0 +1,34 @@
+body.welcome
+{
+  background: #fff;
+}
+
+#home
+{
+  top: 0;
+  padding-top: 0;
+  background: #c03a2a url("http://www.subitolabs.com/assets/imgdiet/home/background.jpg") no-repeat center center;
+  -webkit-background-size: cover;
+  background-size: cover;
+  color: #fff;
+}
+
+.testimonial
+{
+  padding-left: 70px;
+  position: relative;
+
+  img
+  {
+    left: 0;
+    width: 64px;
+    height: 64px;
+    border-radius: 4px;
+    position: absolute;
+  }
+
+  h4
+  {
+    margin: 0;
+  }
+}

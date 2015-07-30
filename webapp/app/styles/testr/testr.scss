@@ -113,10 +113,11 @@ my-json-editor
   h2
   {
     margin: 0;
-    font-size: 20px;
+    font-size: 16px;
     line-height: 30px;
     padding-left: 50px;
     float: left;
+
   }
 
   a
@@ -130,7 +131,19 @@ my-json-editor
   }
 }
 
-.ui-splitbar, body
+body.testr
 {
-  background: $bz_background_green_logo;
+  background: white;
+}
+
+.ui-splitbar:hover
+{
+  background:#c0c0c0;
+}
+
+.stretch
+{
+  left:0;
+  right: 0;
+  bottom: 0;
 }

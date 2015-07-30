@@ -25,3 +25,19 @@ $fa-font-path: "/fonts";
 @import "components-font-awesome/scss/rotated-flipped";
 @import "components-font-awesome/scss/stacked";
 @import "components-font-awesome/scss/icons";
+
+.catchline
+{
+  font-size: 1.4em;
+  line-height: 1.5;
+  font-family: "Merriweather","Georgia",sans-serif;
+  font-weight: 300;
+}
+
+h1
+{
+  padding-bottom: .2em;
+  display: inline-block;
+  font-family: "Montserrat","Helvetica Neue",HelveticaNeue,sans-serif;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+}

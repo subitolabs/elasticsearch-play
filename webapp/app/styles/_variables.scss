@@ -1,30 +1,12 @@
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap/variables";
 @import "compass";
 
-//== Container sizes
-//
-//## Define the maximum width of `.container` for different screen sizes.
-
-// Small screen / tablet
-$container-tablet:             ((520px + $grid-gutter-width));
-//** For `$screen-sm-min` and up.
-$container-sm:                 $container-tablet;
-
-// Medium screen / desktop
-$container-desktop:            ((600px + $grid-gutter-width));
-//** For `$screen-md-min` and up.
-$container-md:                 $container-desktop;
-
-// Large screen / wide desktop
-$container-large-desktop:      ((700px + $grid-gutter-width));
-//** For `$screen-lg-min` and up.
-$container-lg:                 $container-large-desktop;
-
 $bz_background_red_color: #d13f4b;
 $bz_background_green_transparent_color: rgba(13, 205, 191, 0.8);
-$bz_background_green_logo: #2db7b7;
+$bz_background_green_logo: #e43927;
 $bz_background_dark: #474747;
 $bz_timeline_bg: #ECECEC;
+$blue_1: #57CEE7;
 $bz_background_light_gray: #F3F3F5;
 
 $bz_menu_background: #303843;
@@ -38,8 +20,8 @@ $alert-success-text:              #fff;
 $alert-success-bg:                $bz_background_green_transparent_color;
 $alert-success-border:            darken(adjust-hue($bz_background_green_transparent_color, -10), 5%);
 
-$btn-success-bg:                  $bz_background_green_logo;
-$btn-success-border:              $bz_background_green_logo;
+$btn-success-bg:                  $blue_1;
+$btn-success-border:              $blue_1;
 
 $information-phone-small: "only screen and (max-width:330px)";
 $information-phone: "only screen and (max-width : #{$screen-sm-min})";

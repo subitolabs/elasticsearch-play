@@ -86,9 +86,16 @@
 
 <my-dialog id="filterAddDialog" title="Available token filters">
     <div style="margin-bottom: 5px">
-        <input class="form-control" placeholder="Search filter..." ng-model="filtersSearchFilter.title" />
+
     </div>
     <table class="table table-stripped">
+        <thead>
+            <tr>
+                <th colspan="2">
+                    <input class="form-control" placeholder="Search filter..." ng-model="filtersSearchFilter.title" />
+                </th>
+            </tr>
+        </thead>
         <tr ng-repeat="filter in availableFilters | filter:filtersSearchFilter">
             <td width="100%">
                 <a ng-click="addFilter(filter)" class="btn btn-primary" title="Add this filter"><i
@@ -96,7 +103,7 @@
                 {{filter.title}}
             </td>
             <td nowrap><a class="btn btn-default" title="Documentation"
-                          href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/{{filter.url}}"
+                          href="http://www.elastic.co/guide/en/elasticsearch/reference/current/{{filter.url}}"
                           target="_blank">?</a></td>
         </tr>
     </table>
@@ -111,41 +118,25 @@
                 {{token.title}}
             </td>
             <td nowrap><a class="btn btn-default" title="Documentation"
-                          href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/{{token.url}}"
+                          href="http://www.elastic.co/guide/en/elasticsearch/reference/current/{{token.url}}"
                           target="_blank">?</a></td>
         </tr>
     </table>
 </my-dialog>
 
 <my-dialog id="analyzerAddDialog" title="New analyzer">
-    <form class="form-horizontal" ng-submit="addAnalyzer()">
-        <div class="form-group">
-            <label for="inputNewAnalyzerTokenizer" class="col-sm-2 control-label">Tokenizer:</label>
-
-            <div class="col-sm-10">
-                <select class="form-control" id="inputNewAnalyzerTokenizer" ng-model="analyzer_new.tokenizer">
-                    <option value="standard">Standard</option>
-                    <option value="keyword">Keyword</option>
-                    <option value="letter">Letter</option>
-                    <option value="whitespace">whitespace</option>
-                    <option value="uax_url_email">UAX email URL</option>
-                    <option value="path_hierarchy">Path hierarchy</option>
-                    <option value="whitespace">whitespace</option>
-                    <option value="classic">Classic</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputNewAnalyzerName" class="col-sm-2 control-label">Name:</label>
-
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputNewAnalyzerName" ng-model="analyzer_new.name">
-            </div>
-        </div>
-        <div>
-            <input type="submit" class="btn btn-success" value="Ok"/>
-        </div>
-    </form>
+    <table class="table table-stripped">
+        <tr ng-repeat="token in availableAnalyzers">
+            <td width="100%">
+                <a ng-click="addAnalyzer(token)" class="btn btn-primary" title="Add this tokenizer"><i
+                        class="fa fa-plus"></i></a>
+                {{token.title}}
+            </td>
+            <td nowrap><a class="btn btn-default" title="Documentation"
+                          href="http://www.elastic.co/guide/en/elasticsearch/reference/current/{{token.url}}"
+                          target="_blank">?</a></td>
+        </tr>
+    </table>
 </my-dialog>
 
 <my-dialog id="settingsDialog" title="Settings (not working yet..)">

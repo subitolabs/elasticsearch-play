@@ -1,9 +1,19 @@
 var myApp = angular.module('testr', ['ngSanitize', 'ngRoute', 'ui.layout'])
 
-    .run([function()
+    .run(['$rootScope', function($rootScope)
     {
-        document.getElementById('html').className = '';
+        var $html = document.getElementById('html'),
+            $body = document.getElementById('body');
+
+        $html.className = '';
+
+        $rootScope.$on('$routeChangeSuccess', function(ev, evData)
+        {
+            $body.className = evData.controller;
+        });
     }])
+
+
 
     .config(['$routeProvider', function ($routeProvider)
     {
@@ -20,6 +30,6 @@ var myApp = angular.module('testr', ['ngSanitize', 'ngRoute', 'ui.layout'])
     }]);
 
 var testr = {
-    'api': 'http://es.subitolabs.com/api/',
+    'api': 'http://qwant/',// 'http://es.subitolabs.com/api/',
     'app': myApp
 };
