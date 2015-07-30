@@ -5,4 +5,4 @@ webapp/dist
 .tmp
 .sass-cache
 .DS_Store
-api/app/vendor
+api/vendor
