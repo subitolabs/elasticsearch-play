@@ -1,0 +1,26 @@
+{
+    "filter": {
+        "my_lowercase": {
+            "type": "lowercase"
+        },
+        "my_asciifolding": {
+            "type": "asciifolding",
+            "preserve_original": "false"
+        }
+    },
+    "analyzer": {
+        "standard": {
+            "type": "standard",
+            "filters": [
+                "my_asciifolding",
+                "my_lowercase"
+            ],
+            "stopwords": [
+                "the",
+                "with",
+                "on"
+            ]
+        }
+    },
+    "text": "The dog is playing on the beach with the baby!"
+}

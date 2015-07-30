@@ -1,0 +1,16 @@
+{
+    "filter": {
+        "my_lowercase": {
+            "type": "lowercase"
+        }
+    },
+    "analyzer": {
+        "standard": {
+            "type": "standard",
+            "filters": [
+                "my_lowercase"
+            ]
+        }
+    },
+    "text": "The dog is playing on the beach with the baby!"
+}

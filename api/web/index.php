@@ -5,6 +5,8 @@
     header('Access-Control-Max-Age: 1728000');
     header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 
+    define('ROOT', '..');
+
     require_once __DIR__.'/../vendor/autoload.php';
 //var_dump($_SERVER, $_GET);die();
     $request    = \testr\api\http\Request::createFromGlobals();

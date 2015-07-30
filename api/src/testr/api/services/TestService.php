@@ -22,7 +22,12 @@ class TestService
         $inputText          = $request->getString('text', 2, 5000);
         $inputIndex         = $request->getString('index', 2, 128);
 
-        $esClient = new Client();
+        $esClient       = new Client([
+            'hosts' => [
+                  'host' => 'elasticsearch',
+                  'port' => 92000
+            ]
+        ]);
 
         if ($esClient->indices()->exists(['index' => $inputIndex]))
         {
