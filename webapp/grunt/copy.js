@@ -12,7 +12,7 @@ module.exports = {
                     "*.html",
                     "*.js",
                     "views/{,*/}*.html",
-                    "images/{,*/}*.{webp}",
+                    "images/{,*/}*.{jpg}",
                     "fonts/*",
                     "sounds/*"
                 ]

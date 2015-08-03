@@ -13,7 +13,7 @@ class OpenIndexService
         $inputIndex     = $request->getString('index', 2, 128);
         $esClient       = new Client([
             'hosts' => [
-                            'host' => 'elasticsearch',
+                            'host' => 'localhost',
                             'port' => 92000
                         ]
         ]);

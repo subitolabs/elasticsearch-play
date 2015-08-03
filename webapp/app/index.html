@@ -6,36 +6,48 @@
         <meta content="chrome=1" http-equiv="X-UA-Compatible">
         <meta content="notranslate" name="google">
         <meta name="description" content="Play online with filters, tokenizers and analyzers of Apache Lucene and elasticSearch search server.">
-        <meta name="author" content="Subitolabs">
+        <meta name="author" content="Subito Labs">
+        <meta name="robots" content="index,follow,archive">
         <meta name="keywords" content="elasticsearch,filters,analyzers,apache lucene,lucene">
         <link rel="shortcut icon" href="/favicon.ico">
-        <title>ElasticSearch filters, tokenizers, analyzers testr</title>
-        <style>
-            body
-            {
-                margin: 0;
-                padding: 0;
-                background: #2db7b7;
-            }
 
-            svg.loader
-            {
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                margin-top: -5%;
-                margin-left: -5%;
-            }
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@subitolabs" />
+        <meta name="twitter:creator" content="@carlodosso" />
+        <meta name="twitter:url" content="http://www.subitolabs.com/">
+        <meta name="twitter:title" content="Subito Labs - IT Consulting & Development">
+        <meta name="twitter:description" content="Consulting et réalisation : Audit et conseil, Architecture système, Conception, Formation, Responsive Design, Développement, PHP, NodeJs, Javascript, Java, Administration, Suivi, Mobile, CRM.">
+        <meta name="twitter:image" content="http://www.subitolabs.com/assets/imgmin/share-image.png">
 
-            h1.loader
-            {
-                color: #fff;
-                text-align: center;
-                font-style: italic;
-                text-shadow: 0 1px 1px rgb(18, 118, 118);
-            }
-        </style>
-        <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700|Merriweather:400,400italic|Open+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+        <!-- Open graph - http://ogp.me/ -->
+        <meta property="og:title" content="elasticSearch tester: Play with elasticsearch analyzers online" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="http://es.subitolabs.com/" />
+        <meta property="og:image" content="http://www.subitolabs.com/assets/imgmin/share-image.png" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="400" />
+        <meta property="og:image:height" content="300" />
+        <meta property="og:site_name" content="elasticSearch TestR" />
+
+        <link rel="shortcut icon"                    href="http://www.subitolabs.com/assets/img/favicons/favicon.ico">
+        <link rel="apple-touch-icon" sizes="57x57"   href="http://www.subitolabs.com/assets/imgmin/favicons/apple-touch-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60"   href="http://www.subitolabs.com/assets/imgmin/favicons/apple-touch-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72"   href="http://www.subitolabs.com/assets/imgmin/favicons/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76"   href="http://www.subitolabs.com/assets/imgmin/favicons/apple-touch-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="http://www.subitolabs.com/assets/imgmin/favicons/apple-touch-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="http://www.subitolabs.com/assets/imgmin/favicons/apple-touch-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="http://www.subitolabs.com/assets/imgmin/favicons/apple-touch-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="http://www.subitolabs.com/assets/imgmin/favicons/apple-touch-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="http://www.subitolabs.com/assets/imgmin/favicons/apple-touch-icon-180x180.png">
+        <link rel="icon" type="image/png"            href="http://www.subitolabs.com/assets/imgmin/favicons/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png"            href="http://www.subitolabs.com/assets/imgmin/favicons/favicon-194x194.png" sizes="194x194">
+        <link rel="icon" type="image/png"            href="http://www.subitolabs.com/assets/imgmin/favicons/favicon-96x96.png" sizes="96x96">
+        <link rel="icon" type="image/png"            href="http://www.subitolabs.com/assets/imgmin/favicons/android-chrome-192x192.png" sizes="192x192">
+        <link rel="icon" type="image/png"            href="http://www.subitolabs.com/assets/imgmin/favicons/favicon-16x16.png" sizes="16x16">
+
+        <title>ElasticSearch filters, tokenizers, analyzers testr online</title>
+        <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400' rel='stylesheet' type='text/css'>
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -49,6 +61,7 @@
     <body id="body" ng-app="testr">
 
         <div ng-view>
+            <img src="http://www.subitolabs.com/assets/imgmin/logo_full_white.png" class="logo" />
             <h1 class="loader">ElasticSearch online analyzers tester <br/><small>is loading magic ..</small></h1>
             <p class="text-center">Play online with <strong>Apache Lucene</strong> and <strong>ElasticSearch</strong> filters, tokenizers and analyzers.</p>
             <svg class="loader" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="50%" y="50%"

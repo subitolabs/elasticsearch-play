@@ -4,17 +4,12 @@
 testr.app.controller('testr', ['$scope', '$http', '$document', '$routeParams',
     function($scope, $http, $document, $routeParams)
 {
-    $scope.filters          = {};
-    $scope.tokenizers       = {};
-    $scope.analyzers        = {};
-    $scope.index            = $routeParams.index;
-
-    $scope.settings = {
-      'font_size' : 14
-    };
-
-    $scope.analyzer_new     = {};
-
+    $scope.filters              = {};
+    $scope.tokenizers           = {};
+    $scope.analyzers            = {};
+    $scope.index                = $routeParams.index;
+    $scope.settings             = {analyze_filters : true, enabled_positions : false};
+    $scope.analyzer_new         = {};
     $scope.sample               = '';
     $scope.running              = false;
     $scope.error                = null;
@@ -43,7 +38,14 @@ testr.app.controller('testr', ['$scope', '$http', '$document', '$routeParams',
         $http
             .post(
                 testr.api + 'test',
-                {filters : $scope.filters, tokenizers : $scope.tokenizers, analyzers : $scope.analyzers, text : $scope.sample, index : $scope.index}
+                {
+                    filters : $scope.filters,
+                    tokenizers : $scope.tokenizers,
+                    analyzers : $scope.analyzers,
+                    text : $scope.sample,
+                    index : $scope.index,
+                    settings : $scope.settings
+                }
             )
             .success(function(data, status, headers, config)
             {
@@ -139,6 +141,11 @@ testr.app.controller('testr', ['$scope', '$http', '$document', '$routeParams',
 
         return results;
     };
+
+    $scope.$watch('settings.analyze_filters', function()
+    {
+        $scope.run();
+    });
 
     $document.bind('keyup', function(e)
     {

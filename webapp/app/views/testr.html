@@ -3,14 +3,13 @@
         <small>filters tokenizers analyzers</small>
     </h1>
     <div class="pull-right loading-hide">
-        <a ng-href="#/" title="Open an index"><i class="fa  fa-folder-open" style="margin-left: 3px;"></i></a>
+        <a ng-href="#/" title="Home page"><i class="fa fa-home" style="margin-left: 3px;"></i></a>
         <a ng-click="openDialog('save')" href="javascript:void(0)" title="Save this index"><i class="fa  fa-save"></i></a>
-        <a ng-click="openDialog('settings')" href="javascript:void(0)" title="Settings"><i class="fa fa-gears"></i></a>
         <a ng-click="openDialog('about')" href="javascript:void(0)" title="About ElasticSearch Testr"><i class="fa fa-beer"></i></a>
     </div>
 </header>
 
-<ui-layout class="loading-hide" style="top: 40px; left:2px;right: 2px;bottom: 2px;"
+<ui-layout class="loading-hide" style="top: 40px; left:0; right:0; bottom:0"
            options="{ flow : 'row', dividerSize : 5 }">
 
     <ui-layout-container>
@@ -18,21 +17,21 @@
         <ui-layout options="{ flow : 'column', dividerSize : 5 }">
             <ui-layout-container>
                 <div class="__h clearfix">
-                    <h2>Filters</h2>
+                    <h2><i class="fa fa-filter"></i> Filters</h2>
                     <a ng-click="openDialog('filterAdd')" href="javascript:void(0)"><i class="fa fa-plus"></i></a>
                 </div>
                 <my-json-editor ng-model="filters"></my-json-editor>
             </ui-layout-container>
             <ui-layout-container>
                 <div class="__h clearfix">
-                    <h2>Tokenizers</h2>
+                    <h2><i class="fa fa-cut"></i> Tokenizers</h2>
                     <a ng-click="openDialog('tokenizerAdd')" href="javascript:void(0)"><i class="fa fa-plus"></i></a>
                 </div>
                 <my-json-editor ng-model="tokenizers"></my-json-editor>
             </ui-layout-container>
             <ui-layout-container>
                 <div class="__h clearfix">
-                    <h2>Analyzers</h2>
+                    <h2><i class="fa fa-chain"></i> Analyzers</h2>
                     <a ng-click="openDialog('analyzerAdd')" href="javascript:void(0)"><i class="fa fa-plus"></i></a>
                 </div>
                 <my-json-editor ng-model="analyzers"></my-json-editor>
@@ -43,14 +42,22 @@
 
     <ui-layout-container class="results">
         <div class="__h clearfix">
-            <h2>Test</h2>
+            <h2><i class="fa fa-gears"></i> Test</h2>
         </div>
         <div ng-class="{__body : true, loading : running}">
             <form ng-submit="run()">
                 <input type="text" class="form-control" placeholder="Enter phrase to analyze.." ng-model="sample"/>
 
-                <div class="clearfix" style="margin-top:5px">
-                    <button class="btn btn-success" type="submit">Run Tests</button>
+                <div class="__params clearfix">
+                    <button class="btn btn-success pull-left" type="submit">Run Tests</button>
+
+                    <label class="pull-left">
+                        <input type="checkbox" ng-model="settings.analyze_filters" /> Analyze filters
+                    </label>
+
+                    <label class="pull-left">
+                        <input type="checkbox" ng-model="settings.enabled_positions" /> Add positions
+                    </label>
                 </div>
             </form>
             <div class="___h"></div>
@@ -64,18 +71,20 @@
                     <td>Analyzer</td>
                     <td><strong>{{test.title}}</strong></td>
                     <td>
-                                  <span ng-repeat="token in test.tokens" class="label label-primary">
-                                      {{token.token}}
-                                  </span>
+                          <span ng-repeat="token in test.tokens">
+                              <span class="label label-default" ng-show="settings.enabled_positions">{{ token.position }}</span>
+                              <span class="label label-primary">{{token.token}}</span>
+                          </span>
                     </td>
                 </tr>
                 <tr ng-repeat="test in tests.filters">
                     <td>Filter</td>
                     <td><strong>{{test.title}}</strong></td>
                     <td>
-                                  <span ng-repeat="token in test.tokens" class="label label-primary">
-                                      {{token.token}}
-                                  </span>
+                        <span ng-repeat="token in test.tokens">
+                          <span class="label label-default" ng-show="settings.enabled_positions">{{ token.position }}</span>
+                          <span class="label label-primary">{{token.token}}</span>
+                        </span>
                     </td>
                 </tr>
             </table>
@@ -85,9 +94,6 @@
 </ui-layout>
 
 <my-dialog id="filterAddDialog" title="Available token filters">
-    <div style="margin-bottom: 5px">
-
-    </div>
     <table class="table table-stripped">
         <thead>
             <tr>
@@ -137,21 +143,6 @@
                           target="_blank">?</a></td>
         </tr>
     </table>
-</my-dialog>
-
-<my-dialog id="settingsDialog" title="Settings (not working yet..)">
-    <form class="form-horizontal" ng-submit="saveSettings()">
-        <div class="form-group">
-            <label for="inputSettingsFontSize" class="col-sm-4 control-label">Editor font size:</label>
-
-            <div class="col-sm-8">
-                <input type="number" class="form-control" id="inputSettingsFontSize" ng-model="settings.font_size">
-            </div>
-        </div>
-        <div>
-            <input type="submit" class="btn btn-success" value="Save settings"/>
-        </div>
-    </form>
 </my-dialog>
 
 <my-dialog id="aboutDialog" title="About this application">

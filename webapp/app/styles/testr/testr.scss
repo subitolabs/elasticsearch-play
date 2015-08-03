@@ -49,9 +49,20 @@ a.url
   {
     padding: 1%;
 
+    .__params
+    {
+      margin-top: 5px;
+
+      > label
+      {
+        line-height: 30px;
+        margin-left: 10px;
+      }
+    }
+
     .___h
     {
-      height: 40px;
+      height: 20px;
     }
 
     &.running
@@ -71,6 +82,11 @@ a.url
     span.label
     {
       margin-right: 5px;
+
+      &.label-default
+      {
+        margin-right: -5px;
+      }
     }
   }
 
@@ -136,9 +152,14 @@ body.testr
   background: white;
 }
 
-.ui-splitbar:hover
+.ui-splitbar
 {
   background:#c0c0c0;
+
+  &:hover
+  {
+    background: #a7a7a7;
+  }
 }
 
 .stretch

@@ -1,0 +1,70 @@
+{
+    "filter" : {
+        "my_stop": {
+            "type": "stop",
+            "stopwords": [
+                "une",
+                "à",
+                "avec",
+                "the",
+                "of",
+                "le",
+                "la"
+            ],
+            "ignore_case": true,
+            "remove_trailing": false
+        },
+        "my_elision": {
+            "type": "elision",
+            "articles": [
+                "l",
+                "m",
+                "t",
+                "n",
+                "s"
+            ]
+        },
+        "my_stemmer": {
+            "type": "stemmer",
+            "language": "french"
+        },
+        "my_keyword_marker": {
+            "type": "keyword_marker",
+            "keywords": "chevaux,des",
+            "ignore_case": false
+        },
+        "my_synonym": {
+            "type": "synonym",
+            "synonyms": [
+                "chevaux, cheval, animal",
+                "avion, transport, zing"
+            ],
+            "tokenizer": "whitespace"
+        }
+    },
+    "analyzer" : {
+        "simple": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+                "lowercase",
+                "my_elision",
+                "my_stop",
+                "my_synonym"
+            ]
+        },
+        "with_stemming": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+                "lowercase",
+                "my_elision",
+                "my_keyword_marker",
+                "my_stop",
+                "my_stemmer",
+                "my_synonym"
+            ]
+        }
+    },
+    "text" : "Voici une phrase très simple qui va être analysé par elasticsearch: \"L'avion B52A va décoller avec à son bord des magnifiques chevaux\"."
+}

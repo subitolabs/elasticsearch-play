@@ -1,0 +1,22 @@
+{
+    "tokenizer" : {
+        "my_path_hierarchy": {
+            "type": "PathHierarchy",
+            "delimiter": "/",
+            "replacement": "/",
+            "buffer_size": 1024,
+            "reverse": false,
+            "skip": 0
+        }
+    },
+    "analyzer" : {
+        "path": {
+            "type": "custom",
+            "tokenizer": "my_path_hierarchy"
+        },
+        "standard": {
+            "type": "standard"
+        }
+    },
+    "text" : "/var/www/symfony2/superApplication/web/index.php"
+}

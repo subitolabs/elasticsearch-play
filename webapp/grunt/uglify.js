@@ -3,7 +3,7 @@ module.exports = {
         sourceMap: true,
         mangle: true,
         preserveComments: false,
-        compress: true,
+        compress: {},
         beautify: false
     },
     dist: {

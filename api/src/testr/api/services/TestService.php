@@ -19,12 +19,13 @@ class TestService
         $inputAnalyzers     = $request->getJSONObject('analyzers');
         $inputFilters       = $request->getJSONObject('filters');
         $inputTokenizers    = $request->getJSONObject('tokenizers');
+        $inputSettings      = $request->getJSONObject('settings');
         $inputText          = $request->getString('text', 2, 5000);
         $inputIndex         = $request->getString('index', 2, 128);
 
         $esClient       = new Client([
             'hosts' => [
-                  'host' => 'elasticsearch',
+                  'host' => 'localhost',
                   'port' => 92000
             ]
         ]);
@@ -54,6 +55,8 @@ class TestService
         $testAnalyzers  = [];
         $testFilters    = [];
 
+        $processFiltersEnabled = (bool) $inputSettings['analyze_filters'];
+
         while(true)
         {
             usleep(100 * 1000);
@@ -74,19 +77,22 @@ class TestService
                     ];
                 }
 
-                foreach($inputFilters as $filter => $filterData)
+                if ($processFiltersEnabled)
                 {
-                    $tokens = $esClient->indices()->analyze([
-                        'index'     => $inputIndex,
-                        'filters'   => $filter,
-                        'tokenizer' => 'whitespace',
-                        'text'      => $inputText
-                    ]);
+                    foreach($inputFilters as $filter => $filterData)
+                    {
+                        $tokens = $esClient->indices()->analyze([
+                            'index'     => $inputIndex,
+                            'filters'   => $filter,
+                            'tokenizer' => 'whitespace',
+                            'text'      => $inputText
+                        ]);
 
-                    $testFilters[] = [
-                        'title'     => $filter,
-                        'tokens'    => $tokens['tokens']
-                    ];
+                        $testFilters[] = [
+                            'title'     => $filter,
+                            'tokens'    => $tokens['tokens']
+                        ];
+                    }
                 }
 
                 return [
